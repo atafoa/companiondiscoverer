@@ -1,13 +1,17 @@
 JAVAC = javac
 JAVA = java
-
 SOURCES = $(wildcard *.java)
 
 main: $(SOURCES)
-	$(JAVAC) -classpath lib/mysql-connector-java-8.0.16.jar SocketServer.java
+	$(JAVAC) -cp "lib/mysql-connector-java-8.0.16.jar" DatabaseConnector.java
+	$(JAVAC) HTTPThread.java
+	$(JAVAC) SocketServer.java
 
-run: main
-	$(JAVA) -classpath lib/mysql-connector-java-8.0.16.jar SocketServer
+runwindows: main
+	$(JAVA) -cp ".;./lib/mysql-connector-java-8.0.16.jar" SocketServer
+
+runlinux: main
+	$(JAVA) -cp ".:./lib/mysql-connector-java-8.0.16.jar" SocketServer
 
 clean:
 	rm *.class

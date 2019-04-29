@@ -1,2 +1,0 @@
-javac -cp "lib/mysql-connector-java-8.0.16.jar;./TestJDBC.class;." TestJDBC.java WorkGoddamnit.java
-java -cp "lib/mysql-connector-java-8.0.16.jar;./TestJDBC.class;.;./*" WorkGoddamnit

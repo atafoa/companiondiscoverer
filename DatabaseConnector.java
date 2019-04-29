@@ -1,11 +1,3 @@
-import java.io.*;
-import java.net.*;
-import java.util.concurrent.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-
-// new stuff
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,15 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class TestJDBC {
+public class DatabaseConnector {
     private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
-
-
-    public void readDataBase() throws Exception {
+    public void readDatabase() throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -36,18 +26,11 @@ public class TestJDBC {
                     .executeQuery("select * from test.testtable");
             writeResultSet(resultSet);
 
-            preparedStatement = connect
-                    .prepareStatement("insert into test.testtable values (default, ?)");
-            preparedStatement.setString(1, "weeb");
-            preparedStatement.executeUpdate();
-
-            resultSet = statement
-                    .executeQuery("select * from test.testtable");
-            writeResultSet(resultSet);
-
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw e;
-        } finally {
+        }
+        finally {
             close();
         }
 
@@ -60,8 +43,8 @@ public class TestJDBC {
         System.out.println("The columns in the table are: ");
 
         System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
-        for  (int i = 1; i<= resultSet.getMetaData().getColumnCount(); i++){
-            System.out.println("Column " +i  + " "+ resultSet.getMetaData().getColumnName(i));
+        for (int i = 1; i<= resultSet.getMetaData().getColumnCount(); i++) {
+            System.out.println("Column " + i + " " + resultSet.getMetaData().getColumnName(i));
         }
     }
 
