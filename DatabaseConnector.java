@@ -5,13 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DatabaseConnector {
-    private Connection connect = null;
-    private Statement statement = null;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
+public final class DatabaseConnector {
+    private static Connection connect = null;
+    private static Statement statement = null;
+    private static PreparedStatement preparedStatement = null;
+    private static ResultSet resultSet = null;
 
-    public void readDatabase() throws Exception {
+    public static void readDatabase() throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -36,7 +36,7 @@ public class DatabaseConnector {
 
     }
 
-    private void writeMetaData(ResultSet resultSet) throws SQLException {
+    private static void writeMetaData(ResultSet resultSet) throws SQLException {
         //  Now get some metadata from the database
         // Result set get the result of the SQL query
 
@@ -48,7 +48,7 @@ public class DatabaseConnector {
         }
     }
 
-    private void writeResultSet(ResultSet resultSet) throws SQLException {
+    private static void writeResultSet(ResultSet resultSet) throws SQLException {
         // ResultSet is initially before the first data set
         while (resultSet.next()) {
             // It is possible to get the columns via name
@@ -61,7 +61,7 @@ public class DatabaseConnector {
     }
 
     // You need to close the resultSet
-    private void close() {
+    private static void close() {
         try {
             if (resultSet != null) {
                 resultSet.close();

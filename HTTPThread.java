@@ -16,7 +16,7 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
     private Socket connectionSocket;                    // Connection socket to client.
     private BufferedReader requestReader;               // Reader of the request message from client.
     private BufferedOutputStream responseDataStream;    // Buffer stream going out to client.
-
+    
     //===========================
     // CONSTRUCTOR FOR HTTPThread
     //
@@ -84,6 +84,12 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
         else if (targetString[0].equals("api")) {
             statusCode = 981;
             statusText = "DEFINITELY NOT IMPLEMENTED";
+            try {
+                DatabaseConnector.readDatabase();
+            }
+            catch (Exception e) {
+                System.out.println(e);
+            }
             buildResponse(HTTPVERSION, statusCode, statusText, PATH + "/html/react.html");
         }
 

@@ -32,8 +32,6 @@ public class SocketServer {
     //  It then proceeds to wait for connections, and addresses HTTP requests with responses.
     //   
     public static void main(String argv[]) throws Exception {
-        DatabaseConnector dbConnector = new DatabaseConnector();
-        dbConnector.readDatabase();
         // SETTING PORT NUMBER
         Integer portNumber = null;
         if (argv.length > 0) {  // The user may choose to run the program with a port number.
