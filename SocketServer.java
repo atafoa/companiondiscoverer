@@ -134,32 +134,30 @@ class HTTPThread implements Runnable {      // implements Runnable to allow mult
         Boolean moved = false;      // A flag on whether the resource has been moved; by default false.
         
         // Parse the request's start line, splitting it into 3.
+        // line[0] : Request Method
+        // line[1] : Request Target
+        // line[2] : Request Status
         String line[] = requestReader.readLine().split(" ");
-        if (line.length != 3) { // If there are less or more than 3 entries, it is a malformed request.
+        String targetString[] = line[1].substring(1).split("/");
+        
+        if (line.length != 3) {
+            // If there are less or more than 3 entries, it is a malformed request.
             // Set the code, text, and build a response with the error page instead of the original target.
             statusCode = 400;
             statusText = "Bad Request";
             buildResponse(HTTPVERSION, statusCode, statusText, PATH + "/error/400.html");
         }
+        
+        else if (targetString[0].equals("api")) {
+            statusCode = 981;
+            statusText = "DEFINITELY NOT IMPLEMENTED";
+            buildResponse(HTTPVERSION, statusCode, statusText, PATH + "/html/react.html");
+        }
+
         else if (line[0].equals("GET")) { // If the request isn't malformed, then if it is a GET request...
             if (line[1].equals("/")) {      // If the request target is for /
                 line[1] = "/index.html";    // Adjust it to be /index.html
             }
-
-            //======================
-            // MOVED FILES
-            // Moved files go below.
-            // Requests that target a moved file are directed to the new target
-            // and the moved flag is set accordingly.
-            //
-            if (line[1].equals("/soup.html")) { // /soup.html was moved into folder /html/soup.html
-                line[1] = "/html/soup.html";    // Fix target.
-                moved = true;                   // Set moved flag to true.
-            }
-            // END OF MOVED FILES
-            //=======================
-
-            // We continue with a valid GET request.
 
             File existChecker = new File(PATH + line[1]);   // Create a File to check to see if a file exists.
             if (!existChecker.exists()) {                   // If it doesn't exist

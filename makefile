@@ -4,10 +4,10 @@ JAVA = java
 SOURCES = $(wildcard *.java)
 
 main: $(SOURCES)
-	$(JAVAC) SocketServer.java
+	$(JAVAC) -classpath lib/mysql-connector-java-8.0.16.jar SocketServer.java
 
 run: main
-	$(JAVA) SocketServer
+	$(JAVA) -classpath lib/mysql-connector-java-8.0.16.jar SocketServer
 
 clean:
 	rm *.class
