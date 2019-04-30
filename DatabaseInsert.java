@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.Statement;
  
-public class DatabaseLoader {
+public class DatabaseInsert {
 
     private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
 
@@ -34,12 +34,12 @@ public class DatabaseLoader {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    public static void loadDatabase() throws SQLException {
+    public static void insert() throws SQLException {
         String s = new String();
         StringBuffer sb = new StringBuffer();
 
         try {
-            FileReader fr = new FileReader(new File("create_statements.sql"));
+            FileReader fr = new FileReader(new File("insert_statements.sql"));
             // be sure to not have line starting with "--" or "/*" or any other non
             // aplhabetical character
 
@@ -54,7 +54,7 @@ public class DatabaseLoader {
             // then we are sure to have well formed statements
             String[] inst = sb.toString().split(";");
 
-            Connection c = DatabaseLoader.getConnection();
+            Connection c = DatabaseInsert.getConnection();
             Statement st = c.createStatement();
  
             for(int i = 0; i<inst.length; i++)
@@ -80,9 +80,9 @@ public class DatabaseLoader {
         }
  
     }
-    public static void main(String[] args) throws SQLException
-    {   
-        loadDatabase();
+    public static void main(String[] args) throws Exception
+    {  
+        insert();
     }
 
 }
