@@ -1,13 +1,13 @@
 CREATE TABLE ANIMAL (
 	Animal_ID int NOT NULL AUTO_INCREMENT,
-    Description varchar(255) NOT NULL,
+    Description text NOT NULL,
     Age int,
     Name varchar(255) NOT NULL,
     Type varchar(255) NOT NULL,
     Breed varchar(255),
     Size varchar(255),
     Color varchar(255),
-    Availability bit,
+    Available bit,
     Posted_Date date,
     Sex varchar(50),
     Picture_URL text,
@@ -34,30 +34,19 @@ CREATE TABLE DOGS (
     Animal_ID int NOT NULL,
     Service_Animal bit,
     PRIMARY KEY(Animal_ID),
-    FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
+    FOREIGN KEY(Animal_ID) REFERENCES COMMON(Animal_ID)
 );
 CREATE TABLE CATS (
     Animal_ID int NOT NULL,
     DECLAWED bit,
     PRIMARY KEY(Animal_ID),
-    FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
+    FOREIGN KEY(Animal_ID) REFERENCES COMMON(Animal_ID)
 );
 CREATE TABLE FISH (
     Animal_ID int NOT NULL,
-    Description varchar(255) NOT NULL,
-    Age int,
-    Name varchar(255) NOT NULL,
-    Type varchar(255) NOT NULL,
-    Breed varchar(255),
-    Size varchar(255),
-    Color varchar(255),
-    Availability bit,
-    Posted_Date date,
-    Sex varchar(50),
-    Picture_URL text,
     Water_Type varchar(255),
     PRIMARY KEY(Animal_ID),
-    FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
+    FOREIGN KEY(Animal_ID) REFERENCES COMMON(Animal_ID)
 );
 CREATE TABLE ACCOUNT (
     Profile_ID int NOT NULL AUTO_INCREMENT,

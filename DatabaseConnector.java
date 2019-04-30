@@ -5,7 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import java.util.Date;
+
 public final class DatabaseConnector {
+
     private static Connection connect = null;
     private static Statement statement = null;
     private static PreparedStatement preparedStatement = null;
@@ -79,4 +82,33 @@ public final class DatabaseConnector {
         }
     }
 
+    public static void addAccount(String firstName, String lastName, int mobileNumber, String email, String username, String password, String type) throws SQLException {
+        String insertStatement = "INSERT INTO account VALUES (" + firstName + "," + lastName + "," + mobileNumber + "," + email + "," + username + "," + password + "," + new Date() + "," + type + ");";
+        statement = connect.createStatement();
+        resultSet = statement.executeQuery(insertStatement);
+    }
+
+    //public static ResultSet getUsers() {
+        // select users
+    //}
+
+    public static void addAnimal(String desc, int age, String name, String type, String breed, String size, String color, boolean available, char sex, String pictureURL) throws SQLException {
+        String insertStatement = "INSERT INTO animal VALUES (" + desc + "," + age + "," + name + "," + type + "," + breed + "," + size + "," + color + "," + available + "," + new Date() + "," + sex + "," + pictureURL + ");";
+        statement = connect.createStatement();
+        resultSet = statement.executeQuery(insertStatement);
+    }
+
+    //public static ResultSet getAnimal() {
+        // select users
+    //}
+
+    public static void updateAnimal(int id, String columnName, Object data) throws SQLException {
+        String updateStatement = "UPDATE animal SET " + columnName + " = " + data + " WHERE animal_ID = " + id;
+        statement = connect.createStatement();
+        resultSet = statement.executeQuery(updateStatement); 
+    }
+
+    public static void makeAdoption() {
+        
+    }
 }
