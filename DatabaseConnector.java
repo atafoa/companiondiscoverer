@@ -1,3 +1,7 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +15,8 @@ public final class DatabaseConnector {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
-    public static void readDatabase() throws Exception {
+    public static JSONArray readDatabase() throws Exception {
+        JSONArray jsonArr = null;
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -24,6 +29,7 @@ public final class DatabaseConnector {
 
             resultSet = statement
                     .executeQuery("select * from test.testtable");
+            jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
             writeResultSet(resultSet);
 
         }
@@ -33,19 +39,7 @@ public final class DatabaseConnector {
         finally {
             close();
         }
-
-    }
-
-    private static void writeMetaData(ResultSet resultSet) throws SQLException {
-        //  Now get some metadata from the database
-        // Result set get the result of the SQL query
-
-        System.out.println("The columns in the table are: ");
-
-        System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
-        for (int i = 1; i<= resultSet.getMetaData().getColumnCount(); i++) {
-            System.out.println("Column " + i + " " + resultSet.getMetaData().getColumnName(i));
-        }
+        return jsonArr;
     }
 
     private static void writeResultSet(ResultSet resultSet) throws SQLException {

@@ -1,3 +1,7 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
+
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
@@ -64,7 +68,7 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
     private void readRequest() throws IOException {
         Integer statusCode = null;  // HTTP Code to be passed to buildResponse();
         String statusText = null;   // HTTP Status text corresponding to code, also passed to buildResponse();
-        
+        JSONArray jsonArr = null;
         // Parse the request's start line, splitting it into 3.
         // startLine[0] : Request Method
         // startLine[1] : Request Target
@@ -77,8 +81,9 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
             buildResponse(400, "Bad Request", PATH + "/error/400.html");
         }
         else if (targetString[0].equals("api")) {
-            statusCode = WebAPI.handleQuery(startLine[0], startLine[1]);
-            buildAPIResponse(statusCode, "API Done", PATH + "/error/api.html");
+            //statusCode = WebAPI.handleQuery(startLine[0], startLine[1]);
+            jsonArr = WebAPI.handleQuery(startLine[0], startLine[1]);
+            buildAPIResponse(jsonArr, "API Done", PATH + "/error/api.html");
         }
 
         else if (startLine[0].equals("GET")) { // If the request isn't malformed, then if it is a GET request...
@@ -152,27 +157,28 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
         connectionSocket.close();                                           // Close the socket completely.
     }
 
-    private void buildAPIResponse(int statusCode, String statusText, String target) throws IOException {
+    private void buildAPIResponse(JSONArray jsonArr, String statusText, String target) throws IOException {
         // Generates the byte array of the target to be served, and also stores the length of the target.
-        File targetFile = new File(target);
-        int targetLength = (int)targetFile.length();
-        byte[] targetData = fileToBytes(targetFile, targetLength);
+        int statusCode = 600;
+        System.out.println(jsonArr.toString());
+        byte[] jsonByteArray = jsonArr.toString().getBytes();
+        int targetLength = jsonByteArray.length;
         String end = "\r\n";    // Carriage return
 
         // RESPONSE STRINGS - Self Explanatory
         // Each startLine also has the variable end added on, which signifies a carriage return and newstartLine.
-        String statusLine = "HTTP/" + HTTPVERSION + " " + statusCode + " " + statusText + end;    // Variables from function parameters.
-		String serverLine = "Server: Java Webserver for CSE4344 by kxt9434" + end;
-        String dateLine = "Date: " + new Date() + end;
-        String contentTypeLine = "Content-type: " + selectType(target) + end; // Content type determined by function with appropriate MIME typing.
-        String contentLengthLine = "Content-length: " + targetLength + end;   // Length taken from previous stored value above.
+        String statusLine           = "HTTP/" + HTTPVERSION + " " + statusCode + " " + statusText + end;    // Variables from function parameters.
+		String serverLine           = "Server: Java Webserver for CSE4344 by kxt9434" + end;
+        String dateLine             = "Date: " + new Date() + end;
+        String contentTypeLine      = "Content-type: " + selectType(".json") + end; // Content type determined by function with appropriate MIME typing.
+        String contentLengthLine    = "Content-length: " + targetLength + end;   // Length taken from previous stored value above.
 
         // header is the concatenation of the response strings, along with two newstartLines to indicate
         // that the header has ended and the content is next.
         String header = statusLine + serverLine + dateLine + contentTypeLine + contentLengthLine + end;
         
         responseDataStream.write(header.getBytes(), 0, header.length());    // Write the header.
-        responseDataStream.write(targetData, 0, targetLength);              // Write the target data.
+        responseDataStream.write(jsonByteArray, 0, targetLength);              // Write the target data.
         responseDataStream.flush();                                         // Send the data to the client.
 
         responseDataStream.close();                                         // Close the connection.
@@ -210,6 +216,9 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
         }
         else if (targetExtension.equals("ico")) {
             type = "image/vnd.microsoft.icon";
+        }
+        else if (targetExtension.equals("json")) {
+            type = "application/json";
         }
         else {
             // THIS IS A DEFAULT MIME TYPE FOR UNKNOWN EXTENSIONS.

@@ -1,11 +1,15 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
+
 public final class WebAPI {
-    public static int handleQuery(String method, String target) {
+    public static JSONArray handleQuery(String method, String target) {
         try {
-            DatabaseConnector.readDatabase();
+            return DatabaseConnector.readDatabase();
         }
         catch (Exception e) {
             SocketServer.timestamp(e.toString());
         }
-        return 600;
+        return null;
     }
 }
