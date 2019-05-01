@@ -112,3 +112,12 @@ public final class DatabaseConnector {
         
     }
 }
+
+INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
+VALUES('Four month old neutered male. Purrs and plays!',1,'Toothless','Cat','Domestic Short Hair','Small','Black',1,'2019-4-19','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44558614/1/?bust=1556385378&width=560');
+
+INSERT INSERT COMMON(Animal_ID,Type, Weight, Coat_Length, Coat_Texture, Sterilized, House_Trained)
+VALUES(4,'Cat',2,'Medium','Matte',1,1);
+
+INSERT INTO CATS(Animal_ID,Declawed)
+VALUES(4,1);

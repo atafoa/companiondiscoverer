@@ -17,7 +17,7 @@ CREATE TABLE COMMON (
     Animal_ID int NOT NULL,
     Type varchar(255) NOT NULL,
     Weight int,
-    Coat_Length int,
+    Coat_Length varchar(255),
     Coat_Texture varchar (255),
     Sterilized bit,
     House_Trained bit,
