@@ -57,7 +57,6 @@ public class SocketServer {
         // Server has started, now forever wait for connections and handle them.
         while (true) {
             HTTPThread connection = new HTTPThread(publicSocket.accept());      // Accept a new connection and create an instance of HTTPThread with the socket.
-            SocketServer.timestamp("New connection opened, starting thread.");  // Timestamp the occurence.
             Thread connectionThread = new Thread(connection);                   // Create a new thread of the instanced class.
             connectionThread.start();                                           // Start the thread from the run();
         }
