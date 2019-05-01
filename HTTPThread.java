@@ -220,6 +220,9 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
         else if (targetExtension.equals("json")) {
             type = "application/json";
         }
+        else if (targetExtension.equals("js")) {
+            type = "application/js";
+        }
         else {
             // THIS IS A DEFAULT MIME TYPE FOR UNKNOWN EXTENSIONS.
             type = "application/octet-stream";
