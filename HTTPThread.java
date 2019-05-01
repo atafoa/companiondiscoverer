@@ -44,13 +44,13 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
     //  A new thread is created with a socket, and is started.
     //  The started thread begins at run().
     //  run() calls readRequest().
-    //  readRequest() will then call buildResponse().
-    //  buildResponse() will then close the connection.
+    //  readRequest() will then call buildGETResponse().
+    //  buildGETResponse() will then close the connection.
     //
     @Override
     public void run() {
         try {
-            readRequest();  // Function to read the request. Transitions into buildResponse.
+            readRequest();  // Function to read the request. Transitions into buildGETResponse.
         }
         catch (Exception e) {
             System.out.println(e); // Notification for any strange exceptions.
@@ -60,14 +60,14 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
     //===========================
     // readRequest()
     //
-    //  readRequest processes an HTTP request and delivers the result to buildResponse().
+    //  readRequest processes an HTTP request and delivers the result to buildGETResponse().
     //  It works by splitting the startstartLine of the request into 3, and examining the method and target.
     //  After evaluating the request, the function passes a statusCode, statusText, the served file path,
     //  and the HTTP version to the response generator.
     //
     private void readRequest() throws IOException {
-        Integer statusCode = null;  // HTTP Code to be passed to buildResponse();
-        String statusText = null;   // HTTP Status text corresponding to code, also passed to buildResponse();
+        Integer statusCode = null;  // HTTP Code to be passed to buildGETResponse();
+        String statusText = null;   // HTTP Status text corresponding to code, also passed to buildGETResponse();
         JSONArray jsonArr = null;
         // Parse the request's start line, splitting it into 3.
         // startLine[0] : Request Method
@@ -78,7 +78,7 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
 
         // If there are less or more than 3 entries, it is a malformed request. Build response with error page.        
         if (startLine.length != 3) {
-            buildResponse(400, "Bad Request", PATH + "/error/400.html");
+            buildGETResponse(400, "Bad Request", PATH + "/error/400.html");
         }
         else if (targetString[0].equals("api")) {
             //statusCode = WebAPI.handleQuery(startLine[0], startLine[1]);
@@ -94,28 +94,27 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
             File existChecker = new File(PATH + startLine[1]);   // Create a File to check to see if a file exists.
             if (!existChecker.exists()) {                   // If it doesn't exist
                 // Set the code, text, and build a response with the error page instead of the original target.
-                buildResponse(404, "File Not Found", PATH + "/error/404.html");
+                buildGETResponse(404, "File Not Found", PATH + "/error/404.html");
             }
             else {  // Otherwise, it exists!
                 // Now, build a response with the file we have worked so hard to GET.
-                buildResponse(200, "OK", PATH + startLine[1]);
+                buildGETResponse(200, "OK", PATH + startLine[1]);
             }
         }
         else if (unsupportedMethods.contains(startLine[0])) {    // If the request had a unsupportedMethod (see above ArrayList)
             // Set the code, text, and build a response with the error page instead of the original target.
-            buildResponse(501, "HTTP method not supported.", PATH + "/error/501.html");
+            buildGETResponse(501, "HTTP method not supported.", PATH + "/error/501.html");
         }
         else {  // If we reach this point, we must send some kind of response, but we haven't been able to detect it.
             // It is then appropriate to generate a generic error.
             // Set the code, text, and build a response with the error page instead of the original target.
-            buildResponse(500, "Internal Server Error", PATH + "/error/500.html");
+            buildGETResponse(500, "Internal Server Error", PATH + "/error/500.html");
         }
         // At the end of this, log the request and the according response code.
-        SocketServer.timestamp(startLine[0] + " request for " + startLine[1] + ", responded with code " + statusCode + ".");
     }
     
     //===========================
-    //  buildResponse FUNCTION
+    //  buildGETResponse FUNCTION
     //
     //  Takes in protocolVersion, statusCode, statusText, and target which
     //  is all it needs to build a response.
@@ -130,7 +129,7 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
     //  After the information has been flushed, the connection closes and the
     //  thread has reached the end of its life.
     //
-    private void buildResponse(int statusCode, String statusText, String target) throws IOException {
+    private void buildGETResponse(int statusCode, String statusText, String target) throws IOException {
         // Generates the byte array of the target to be served, and also stores the length of the target.
         File targetFile = new File(target);
         int targetLength = (int)targetFile.length();
@@ -155,6 +154,7 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
 
         responseDataStream.close();                                         // Close the connection.
         connectionSocket.close();                                           // Close the socket completely.
+        SocketServer.timestamp("GET request for " + target + ", responded with code " + statusCode + ".");
     }
 
     private void buildAPIResponse(JSONArray jsonArr, String statusText, String target) throws IOException {
@@ -170,7 +170,7 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
         String statusLine           = "HTTP/" + HTTPVERSION + " " + statusCode + " " + statusText + end;    // Variables from function parameters.
 		String serverLine           = "Server: Java Webserver for CSE4344 by kxt9434" + end;
         String dateLine             = "Date: " + new Date() + end;
-        String contentTypeLine      = "Content-type: " + selectType(".json") + end; // Content type determined by function with appropriate MIME typing.
+        String contentTypeLine      = "Content-type: " + selectType("itsa.json") + end; // Content type determined by function with appropriate MIME typing.
         String contentLengthLine    = "Content-length: " + targetLength + end;   // Length taken from previous stored value above.
 
         // header is the concatenation of the response strings, along with two newstartLines to indicate
