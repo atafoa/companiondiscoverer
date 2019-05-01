@@ -25,7 +25,7 @@ public class DatabaseLoader {
 
     }
 
-    private static final String URL = "jdbc:mysql://71.8.120.253:8001/test?";
+    private static final String URL = "jdbc:mysql://71.8.120.253:8001/companiondiscoverer?";
     private static final String USER = "root";
     private static final String PASSWORD = "password";
     private static String INSTRUCTIONS = new String();

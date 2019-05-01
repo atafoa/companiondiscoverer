@@ -46,7 +46,7 @@ CREATE TABLE FISH (
     Animal_ID int NOT NULL,
     Water_Type varchar(255),
     PRIMARY KEY(Animal_ID),
-    FOREIGN KEY(Animal_ID) REFERENCES COMMON(Animal_ID)
+    FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
 );
 CREATE TABLE ACCOUNT (
     Profile_ID int NOT NULL AUTO_INCREMENT,
@@ -66,7 +66,7 @@ CREATE TABLE ADMIN (
     PRIMARY KEY(Profile_ID),
     FOREIGN KEY (Profile_ID) REFERENCES ACCOUNT(Profile_ID)
 );
-CREATE TABLE PROFILES(
+CREATE TABLE PROFILE(
     Profile_ID int NOT NULL,
     PRIMARY KEY(Profile_ID),
     FOREIGN KEY (Profile_ID) REFERENCES ACCOUNT(Profile_ID)
@@ -85,7 +85,7 @@ CREATE TABLE LIKES (
     Profile_ID int NOT NULL,
     Animal_ID int NOT NULL,
     PRIMARY KEY(Animal_ID,Profile_ID),
-    FOREIGN KEY (Profile_ID) REFERENCES ACCOUNT(Profile_ID),
+    FOREIGN KEY (Profile_ID) REFERENCES PROFILE(Profile_ID),
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
 );
 CREATE TABLE ADOPTION (
@@ -95,7 +95,7 @@ CREATE TABLE ADOPTION (
     Adoption_Date timestamp NOT NULL,
     Adoption_Fee int NOT NULL,
     PRIMARY KEY(Adoption_ID),
-    FOREIGN KEY (Profile_ID) REFERENCES ACCOUNT(Profile_ID),
+    FOREIGN KEY (Profile_ID) REFERENCES PROFILE(Profile_ID),
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
 );
 CREATE TABLE DONATION (
@@ -104,7 +104,7 @@ CREATE TABLE DONATION (
     Donation_Date timestamp NOT NULL,
     Donation_Amount int NOT NULL,
     PRIMARY KEY(Animal_ID, Profile_ID, Donation_Date),
-    FOREIGN KEY (Profile_ID) REFERENCES ACCOUNT(Profile_ID),
+    FOREIGN KEY (Profile_ID) REFERENCES PROFILE(Profile_ID),
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
 );
 

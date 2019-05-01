@@ -20,7 +20,7 @@ public final class DatabaseConnector {
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Setup the connection with the DB
             connect = DriverManager
-                    .getConnection("jdbc:mysql://71.8.120.253:8001/test?"
+                    .getConnection("jdbc:mysql://71.8.120.253:8001/companiondiscoverer?"
                             + "user=root&password=password");
 
             statement = connect.createStatement();
