@@ -64,7 +64,7 @@ public class DatabaseLoader {
                 if(!inst[i].trim().equals(""))
                 {
                     st.executeUpdate(inst[i]);
-                    System.out.println(">>"+inst[i]);
+                    //System.out.println(">>"+inst[i]);
                 }
             }
    
@@ -76,7 +76,7 @@ public class DatabaseLoader {
             System.out.println("*** Error : ");
             e.printStackTrace();
             System.out.println("################################################");
-            System.out.println(sb.toString());
+            //System.out.println(sb.toString());
         }
  
     }

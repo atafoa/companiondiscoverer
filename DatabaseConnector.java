@@ -105,10 +105,16 @@ public final class DatabaseConnector {
             + "'" + username + "'," 
             + "'" + password + "'," 
             + "default," 
-            + "'Profile'" 
+            + "'User'" 
             + ");";
         preparedStatement = connect.prepareStatement(insertStatement);
         preparedStatement.executeUpdate();
+
+        String query = "SELECT profile_id FROM account WHERE username='" + username + "' AND type='User';";  // gets profile id
+        JSONArray jsonArr = execute(query);
+        int profile_id = profile_id = jsonArr.getJSONObject(0).getInt("Profile_ID");
+        insertStatement = "INSERT INTO profile VALUES (" + profile_id + ");";
+        manipulate(insertStatement);
     }
 
     public static void addAnimal(String params[]) throws SQLException, Exception {
@@ -123,6 +129,7 @@ public final class DatabaseConnector {
         String description = params[7].substring(params[7].lastIndexOf('=') + 1);
         description = description.replace("+", " ");        
         String picURL = params[8].substring(params[8].lastIndexOf('=') + 1);
+        String adoptionFee = params[9].substring(params[9].lastIndexOf('=') + 1);
         String insertStatement = "INSERT INTO animal VALUES ("
             + "default," 
             + "'" + description + "',"
@@ -136,9 +143,8 @@ public final class DatabaseConnector {
             + "default," 
             + "'" + sex + "'," 
             + "'" + picURL + "'" 
+            + adoptionFee 
             + ");";
-        preparedStatement = connect.prepareStatement(insertStatement);
-        preparedStatement.executeUpdate();
     }
 
     public static String authenticate(String params[]) throws SQLException, Exception {
@@ -149,24 +155,79 @@ public final class DatabaseConnector {
         statement = connect.createStatement();
         resultSet = statement.executeQuery(query);
         JSONArray jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
-
+        String permissionLevel = "invalid";
         if (!jsonArr.toString().equals("[]")) {
-            return "admin";
+            permissionLevel = "admin";
         }
 
-        query = "SELECT * FROM account WHERE username='" + username + "' AND password='" + password + "' AND type='Profile';";
+        query = "SELECT * FROM account WHERE username='" + username + "' AND password='" + password + "' AND type='User';";
         statement = connect.createStatement();
         resultSet = statement.executeQuery(query);
         jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
         
         if (!jsonArr.toString().equals("[]")) {
-            return "profile";
+            permissionLevel = "profile";
         }
-        return "invalid";
+        
+        if (permissionLevel.equals("admin")) {
+            return "/html/admin.html";
+        }
+        else if (permissionLevel.equals("profile")) {
+            return "/html/user.html";
+        }
+        return "/html/invalidlogin.html";
+    }
+
+    public static String adoptAnimal(String[] params) throws Exception {
+        establishConnection();
+        String username = params[0].substring(params[0].lastIndexOf('=') + 1);
+        String animal_id = params[1].substring(params[1].lastIndexOf('=') + 1);
+        try {
+        String query = "SELECT profile_id FROM account WHERE username='" + username + "' AND type='User';";  // gets profile id
+        JSONArray jsonArr = execute(query);
+        int profile_id = -1;
+        if (jsonArr.toString().equals("[]")) {
+            return "/html/failure.html";
+        }
+        else {
+            profile_id = jsonArr.getJSONObject(0).getInt("Profile_ID");
+        }
+        query = "SELECT count(*) FROM animal WHERE animal_id=" + animal_id + " AND available=1;";
+        jsonArr = execute(query);
+        if (jsonArr.toString().equals("[]")) {
+            return "/html/failure.html";
+        }
+        query = "UPDATE animal SET available=0 WHERE animal_id=" + animal_id + ";";
+        manipulate(query);
+        query = "INSERT into adoption values (" + animal_id + ", " + profile_id + ", default);";
+        manipulate(query);
+        return "/html/success.html";
+        }
+        catch (Exception e) {
+            return "/html/failure.html";
+        }
+    }
+
+    private static JSONArray execute(String query) throws Exception {
+        statement = connect.createStatement();
+        resultSet = statement.executeQuery(query);
+        return ResultSetConverter.ResultSetToJSON(resultSet);
+    }
+
+    private static void manipulate(String query) throws Exception {
+        preparedStatement = connect.prepareStatement(query);
+        preparedStatement.executeUpdate();
     }
 
     public static JSONArray getAnimals(String[] params) throws Exception {
         establishConnection();
+        if (params != null) {
+            int paramNumber = params.length;
+            for (int i = 0; i < paramNumber; i++) {
+
+            }
+        }
+
         JSONArray jsonArr = null;
         statement = connect.createStatement();
         resultSet = statement.executeQuery("select * from animal;");
