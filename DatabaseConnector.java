@@ -18,6 +18,16 @@ public final class DatabaseConnector {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
+    public static void establishConnection() throws Exception {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connect = DriverManager.getConnection("jdbc:mysql://71.8.120.253:8001/companiondiscoverer?user=root&password=password");
+        }
+        catch (Exception e) {
+            throw e;
+        }
+    }
+
     public static JSONArray readDatabase() throws Exception {
         JSONArray jsonArr = null;
         try {
@@ -76,10 +86,65 @@ public final class DatabaseConnector {
         }
     }
 
-    public static void addAccount(String firstName, String lastName, int mobileNumber, String email, String username, String password, String type) throws SQLException {
-        String insertStatement = "INSERT INTO account VALUES (" + firstName + "," + lastName + "," + mobileNumber + "," + email + "," + username + "," + password + "," + new Date() + "," + type + ");";
+    public static void addAccount(String params[]) throws SQLException, Exception {
+        establishConnection();
+        String username = params[0].substring(params[0].lastIndexOf('=') + 1);
+        String password = params[1].substring(params[1].lastIndexOf('=') + 1);
+        String firstName = params[2].substring(params[2].lastIndexOf('=') + 1);
+        String lastName = params[3].substring(params[3].lastIndexOf('=') + 1);
+        String email = params[4].substring(params[4].lastIndexOf('=') + 1);
+        String mobileNumber = params[5].substring(params[5].lastIndexOf('=') + 1);
+        String insertStatement = "INSERT INTO account VALUES ("
+            + firstName + ","
+            + lastName + "," 
+            + mobileNumber + "," 
+            + email + "," 
+            + username + "," 
+            + password + "," 
+            + "default," 
+            + "Profile" 
+            + ");";
+        System.out.println(insertStatement);
+
+        /*preparedStatement = connect
+                    .prepareStatement("INSERT INTO account VALUES (?,?,?,?,?,?,default,?)");
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, mobileNumber);
+            preparedStatement.setString(4, email);
+            preparedStatement.setString(5, username);
+            preparedStatement.setString(6, password);
+            preparedStatement.setString(8, "Profile");
+            preparedStatement.executeUpdate();
+        */
+        preparedStatement = connect.prepareStatement(insertStatement);
+        preparedStatement.executeUpdate();
+        close();
+    }
+
+    public static boolean authenticate(String params[]) throws SQLException, Exception {
+        establishConnection();
+        String username = params[0].substring(params[0].lastIndexOf('=') + 1);
+        String password = params[1].substring(params[1].lastIndexOf('=') + 1);
+        String firstName = params[2].substring(params[2].lastIndexOf('=') + 1);
+        String lastName = params[3].substring(params[3].lastIndexOf('=') + 1);
+        String email = params[4].substring(params[4].lastIndexOf('=') + 1);
+        String mobileNumber = params[5].substring(params[5].lastIndexOf('=') + 1);
+        String insertStatement = "INSERT INTO account VALUES ("
+            + firstName + ","
+            + lastName + "," 
+            + mobileNumber + "," 
+            + email + "," 
+            + username + "," 
+            + password + "," 
+            + "default," 
+            + "Profile" 
+            + ");";
+        System.out.println(insertStatement);
         statement = connect.createStatement();
         resultSet = statement.executeQuery(insertStatement);
+        close();
+        return true;
     }
 
     //public static ResultSet getUsers() {

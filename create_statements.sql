@@ -8,7 +8,7 @@ CREATE TABLE ANIMAL (
     Size varchar(255),
     Color varchar(255),
     Available bit,
-    Posted_Date date,
+    Posted_Date timestamp DEFAULT CURRENT_TIMESTAMP,
     Sex varchar(50),
     Picture_URL text,
     PRIMARY KEY(Animal_ID)
@@ -56,7 +56,7 @@ CREATE TABLE ACCOUNT (
     Email varchar(255) NOT NULL,
     Username varchar(255) NOT NULL,
     Password varchar(255) NOT NULL,
-    Join_Date date,
+    Join_Date timestamp DEFAULT CURRENT_TIMESTAMP,
     Type varchar(255),
     PRIMARY KEY(Profile_ID)
 );
@@ -76,7 +76,7 @@ CREATE TABLE INQUIRY (
     Animal_ID int NOT NULL,
     Inquiry_Question varchar(255),
     Inquiry_Answers varchar(255),
-    Inquiry_Date timestamp NOT NULL,
+    Inquiry_Date timestamp DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(Animal_ID, Profile_ID, Inquiry_Date),
     FOREIGN KEY (Profile_ID) REFERENCES ACCOUNT(Profile_ID),
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
@@ -92,7 +92,7 @@ CREATE TABLE ADOPTION (
     Profile_ID int NOT NULL,
     Animal_ID int NOT NULL,
     Adoption_ID int NOT NULL,
-    Adoption_Date timestamp NOT NULL,
+    Adoption_Date timestamp DEFAULT CURRENT_TIMESTAMP,
     Adoption_Fee int NOT NULL,
     PRIMARY KEY(Adoption_ID),
     FOREIGN KEY (Profile_ID) REFERENCES PROFILE(Profile_ID),
@@ -101,7 +101,7 @@ CREATE TABLE ADOPTION (
 CREATE TABLE DONATION (
     Profile_ID int NOT NULL,
     Animal_ID int NOT NULL,
-    Donation_Date timestamp NOT NULL,
+    Donation_Date timestamp DEFAULT CURRENT_TIMESTAMP,
     Donation_Amount int NOT NULL,
     PRIMARY KEY(Animal_ID, Profile_ID, Donation_Date),
     FOREIGN KEY (Profile_ID) REFERENCES PROFILE(Profile_ID),

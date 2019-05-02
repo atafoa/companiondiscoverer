@@ -82,8 +82,9 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
         }
         else if (targetString[0].equals("api")) {
             //statusCode = WebAPI.handleQuery(startLine[0], startLine[1]);
-            jsonArr = WebAPI.handleQuery(startLine[0], startLine[1]);
-            buildAPIResponse(jsonArr, "API Done", PATH + "/error/api.html");
+            SocketServer.timestamp("API " + startLine[0] + " request for " + targetString[1] + ".");
+            jsonArr = WebAPI.handleQuery(startLine[0], targetString[1]); // targetString[1] is the api request
+            buildAPIResponse(jsonArr, "API OK", PATH + "/error/api.html");
         }
 
         else if (startLine[0].equals("GET")) { // If the request isn't malformed, then if it is a GET request...
@@ -159,7 +160,7 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
 
     private void buildAPIResponse(JSONArray jsonArr, String statusText, String target) throws IOException {
         // Generates the byte array of the target to be served, and also stores the length of the target.
-        int statusCode = 600;
+        int statusCode = 200;
         System.out.println(jsonArr.toString());
         byte[] jsonByteArray = jsonArr.toString().getBytes();
         int targetLength = jsonByteArray.length;
