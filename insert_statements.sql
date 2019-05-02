@@ -25,7 +25,6 @@ VALUES(3,'Dog',12,'Short','Matte',1,1);
 INSERT INTO DOGS(Animal_ID,Service_Animal)
 VALUES(3,0);
 
-
 INSERT INTO ANIMAL(Adoption_Fee, Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
 VALUES(30, 'I am a sweet multicolored tabby girl about a year old. I love to be petted and will snuggle with you. I would love a permanent home! Please add me to your family!',1,'Meghan','Cat','Domestic Short Hair','Large','Multicolored',0,'2019-2-13','F','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/42643693/1/?bust=1556385378&width=560');
 
