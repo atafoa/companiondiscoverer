@@ -1,5 +1,5 @@
 INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex)
-VALUES ('Meet Tammy. Tammy was very timid when she first arrived with us however she has really become comfortable in her foster home and is very sweet. She is completely house trained, does well in a crate and loves to cuddle under the covers. She would love a home of her own where she will be loved. She would do find with other small dogs. She tries to bully bigger dogs. She would probably be best with older (10+)',5,'Tammy','Dog','Chihuahua','Small','Black',1,'2019-4-15','F');
+VALUES ('Meet Tammy. Tammy was very timid when she first arrived with us however she has really become comfortable in her foster home and is very sweet. She is completely house trained, does well in a crate and loves to cuddle under the covers. She would love a home of her own where she will be loved. She would do find with other small dogs. She tries to bully bigger dogs. She would probably be best with older (10+)',5,'Tammy','Dog','Chihuahua','Small','Black',0,'2019-4-15','F');
 
 INSERT INTO COMMON(Animal_ID,Type, Weight, Coat_Length, Sterilized, House_Trained)
 VALUES(1,'Dog',5,'Short',1,1);
@@ -8,7 +8,7 @@ INSERT INTO DOGS(Animal_ID,Service_Animal)
 VALUES(1,1);
 
 INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
-VALUES ('Meet Todd. Todd is about a year and a half and is an Old English Bulldog. He is sweet and playful and great with kids and adults. He loves to play fetch and then get loved on. He would do best as an only dog or with a submissive female. He is crate and house trained. He was treated for heartworms and has been fully vetted.',1,'Todd','Dog','American Bulldog','Large','Brown',1,'2019-5-16','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44347084/1/?bust=1553926457&width=560');
+VALUES ('Meet Todd. Todd is about a year and a half and is an Old English Bulldog. He is sweet and playful and great with kids and adults. He loves to play fetch and then get loved on. He would do best as an only dog or with a submissive female. He is crate and house trained. He was treated for heartworms and has been fully vetted.',1,'Todd','Dog','American Bulldog','Large','Brown',0,'2019-5-16','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44347084/1/?bust=1553926457&width=560');
 
 INSERT INTO COMMON(Animal_ID,Type, Weight, Coat_Length, Coat_Texture, Sterilized, House_Trained)
 VALUES(2,'Dog',5,'Short','Matte',1,1);
@@ -17,7 +17,7 @@ INSERT INTO DOGS(Animal_ID,Service_Animal)
 VALUES(2,1);
 
 INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
-VALUES ('Meet Jaxx, a 4 year old Parvo survivors. She was surrendered to us along with her mate Harlem when they both came down with Parvo. They have been treated and are back to complete health. She is a little shy but very sweet.',5,'Jaxx','Dog','Dachshund Chihuahua Mix','Small','Brown',1,'2019-1-11','F','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44203335/1/?bust=1552317894&width=560');
+VALUES ('Meet Jaxx, a 4 year old Parvo survivors. She was surrendered to us along with her mate Harlem when they both came down with Parvo. They have been treated and are back to complete health. She is a little shy but very sweet.',5,'Jaxx','Dog','Dachshund Chihuahua Mix','Small','Brown',0,'2019-1-11','F','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44203335/1/?bust=1552317894&width=560');
 
 INSERT INTO COMMON(Animal_ID,Type, Weight, Coat_Length, Coat_Texture, Sterilized, House_Trained)
 VALUES(3,'Dog',12,'Short','Matte',1,1);
@@ -27,7 +27,7 @@ VALUES(3,0);
 
 
 INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
-VALUES('I am a sweet multicolored tabby girl about a year old. I love to be petted and will snuggle with you. I would love a permanent home! Please add me to your family!',1,'Meghan','Cat','Domestic Short Hair','Large','Multicolored',1,'2019-2-13','F','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/42643693/1/?bust=1556385378&width=560');
+VALUES('I am a sweet multicolored tabby girl about a year old. I love to be petted and will snuggle with you. I would love a permanent home! Please add me to your family!',1,'Meghan','Cat','Domestic Short Hair','Large','Multicolored',0,'2019-2-13','F','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/42643693/1/?bust=1556385378&width=560');
 
 INSERT INTO COMMON(Animal_ID,Type, Weight, Coat_Length, Coat_Texture, Sterilized, House_Trained)
 VALUES(4,'Cat',12,'Short','Matte',1,1);
@@ -36,7 +36,7 @@ INSERT INTO CATS(Animal_ID,Declawed)
 VALUES(4,1);
 
 INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
-VALUES('Four month old neutered male. Purrs and plays!',1,'Toothless','Cat','Domestic Short Hair','Small','Black',1,'2019-4-19','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44558614/1/?bust=1556385378&width=560');
+VALUES('Four month old neutered male. Purrs and plays!',1,'Toothless','Cat','Domestic Short Hair','Small','Black',0,'2019-4-19','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44558614/1/?bust=1556385378&width=560');
 
 INSERT INTO COMMON(Animal_ID,Type, Weight, Coat_Length, Coat_Texture, Sterilized, House_Trained)
 VALUES(5,'Cat',12,'Short','Matte',1,1);
@@ -45,7 +45,7 @@ INSERT INTO CATS(Animal_ID,Declawed)
 VALUES(5,1);
 
 INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
-VALUES('I am a male kitty about 2 years old. I am very sweet and relaxed kitty. I would love to have a forever home! Please consider adopting me. I will play with you or with my favorite toys, and will also cuddle with you too! Older children 0nly.',2,'Sargeant','Cat','Domestic Short Hair','Large','Multicolored',1,'2019-3-15','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/42643694/1/?bust=1556385379&width=560');
+VALUES('I am a male kitty about 2 years old. I am very sweet and relaxed kitty. I would love to have a forever home! Please consider adopting me. I will play with you or with my favorite toys, and will also cuddle with you too! Older children 0nly.',2,'Sargeant','Cat','Domestic Short Hair','Large','Multicolored',0,'2019-3-15','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/42643694/1/?bust=1556385379&width=560');
 
 INSERT INTO COMMON(Animal_ID,Type, Weight, Coat_Length, Coat_Texture, Sterilized, House_Trained)
 VALUES(6,'Cat',12,'Short','Matte',1,1);
@@ -54,7 +54,7 @@ INSERT INTO CATS(Animal_ID,Declawed)
 VALUES(6,0);
 
 INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
-VALUES('Hello! I have been told I am a purr machine. You see, I just love human attention and will always reward you with my great purr. I am very playful and just want to hang out with my favorite people. Could you be the right family for me?',1,'Lady Grey','Cat','Russian Blue Mix','Small','Grey',1,'2019-3-29','F','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44484029/1/?bust=1555521659&width=560');
+VALUES('Hello! I have been told I am a purr machine. You see, I just love human attention and will always reward you with my great purr. I am very playful and just want to hang out with my favorite people. Could you be the right family for me?',1,'Lady Grey','Cat','Russian Blue Mix','Small','Grey',0,'2019-3-29','F','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44484029/1/?bust=1555521659&width=560');
 
 INSERT INTO COMMON(Animal_ID,Type, Weight, Coat_Length, Coat_Texture, Sterilized, House_Trained)
 VALUES(7,'Cat',12,'Short','Matte',1,1);
@@ -63,7 +63,7 @@ INSERT INTO CATS(Animal_ID,Declawed)
 VALUES(7,0);
 
 INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
-VALUES('I am very playful and just want to hang out with my favorite people.',3,'Tiger','Cat','Domestic Short Hair','Small','Orange and White',1,'2019-4-21','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44485263/1/?bust=1555524364&width=560');
+VALUES('I am very playful and just want to hang out with my favorite people.',3,'Tiger','Cat','Domestic Short Hair','Small','Orange and White',0,'2019-4-21','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44485263/1/?bust=1555524364&width=560');
 
 INSERT INTO COMMON(Animal_ID,Type, Weight, Coat_Length, Coat_Texture, Sterilized, House_Trained)
 VALUES(8,'Cat',12,'Short','Matte',1,1);
@@ -72,7 +72,7 @@ INSERT INTO CATS(Animal_ID,Declawed)
 VALUES(8,0);
 
 INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
-VALUES('Hello! I have been told I am a purr machine. You see, I just love human attention and will always reward you with my great purr.',2,'Toby','Cat','Domestic Short Hair','Small','White',1,'2019-4-20','F','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44483873/1/?bust=1555521275&width=560');
+VALUES('Hello! I have been told I am a purr machine. You see, I just love human attention and will always reward you with my great purr.',2,'Toby','Cat','Domestic Short Hair','Small','White',0,'2019-4-20','F','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44483873/1/?bust=1555521275&width=560');
 
 INSERT INTO COMMON(Animal_ID,Type, Weight, Coat_Length, Coat_Texture, Sterilized, House_Trained)
 VALUES(9,'Cat',12,'Short','Matte',1,1);
@@ -81,7 +81,7 @@ INSERT INTO CATS(Animal_ID,Declawed)
 VALUES(9,1);
 
 INSERT INTO ANIMAL(Description, Age, Name, Type, Breed, Size, Color, Available, Posted_Date, Sex,Picture_URL)
-VALUES('I just love human attention and will always reward you with my great purr',4,'Rodemus','Cat','Domestic Medium Hair Mix','Small','Black and White',1,'2019-2-12','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44478117/1/?bust=1555455567&width=560');
+VALUES('I just love human attention and will always reward you with my great purr',4,'Rodemus','Cat','Domestic Medium Hair Mix','Small','Black and White',0,'2019-2-12','M','https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44478117/1/?bust=1555455567&width=560');
 
 INSERT INTO COMMON(Animal_ID,Type, Weight, Coat_Length, Coat_Texture, Sterilized, House_Trained)
 VALUES(10,'Cat',12,'Short','Matte',1,1);
@@ -359,4 +359,56 @@ VALUES(20,11,'2019-5-1 20:00:00',10);
 
 INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
 VALUES(20,12,'2019-5-1 13:00:00',20);
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(1,3,'How Old is Tammy?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(2,4,'How well does he play with others?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(3,5,'How much is the adoption fee?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(4,6,'Will she play well with my other pets?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(5,7,'How big is this animal?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(6,8,'Is he vaccinated?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(7,9,'How much is the adoption fee?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(8,11,'How much is the adoption fee?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(9,10,'How much is the adoption fee?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(10,12,'How much is the adoption fee?');
+
+insert into adoption values (default, 30, 3, default);
+insert into adoption values (default, 30, 4, default);
+insert into adoption values (default, 30, 5, default);
+insert into adoption values (default, 30, 6, default);
+insert into adoption values (default, 30, 7, default);
+insert into adoption values (default, 30, 8, default);
+insert into adoption values (default, 30, 9, default);
+insert into adoption values (default, 30, 10, default);
+insert into adoption values (default, 30, 11, default);
+insert into adoption values (default, 30, 12, default);
+insert into adoption values (default, 30, 3, default);
+insert into adoption values (default, 30, 4, default);
+insert into adoption values (default, 30, 5, default);
+insert into adoption values (default, 30, 6, default);
+insert into adoption values (default, 30, 7, default);
+insert into adoption values (default, 30, 8, default);
+insert into adoption values (default, 30, 9, default);
+insert into adoption values (default, 30, 10, default);
+insert into adoption values (default, 30, 11, default);
+insert into adoption values (default, 30, 12, default);
+
 
