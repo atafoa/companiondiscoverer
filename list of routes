@@ -1,0 +1,6 @@
+/api/get/
+-animals
+/api/post/
+-register
+-login
+-newanimal
