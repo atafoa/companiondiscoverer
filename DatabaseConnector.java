@@ -109,6 +109,12 @@ public final class DatabaseConnector {
             + ");";
         preparedStatement = connect.prepareStatement(insertStatement);
         preparedStatement.executeUpdate();
+
+        String query = "SELECT profile_id FROM account WHERE username='" + username + "' AND type='User';";  // gets profile id
+        JSONArray jsonArr = execute(query);
+        int profile_id = profile_id = jsonArr.getJSONObject(0).getInt("Profile_ID");
+        insertStatement = "INSERT INTO profile VALUES (" + profile_id + ");";
+        manipulate(insertStatement);
     }
 
     public static void addAnimal(String params[]) throws SQLException, Exception {
@@ -176,6 +182,7 @@ public final class DatabaseConnector {
         establishConnection();
         String username = params[0].substring(params[0].lastIndexOf('=') + 1);
         String animal_id = params[1].substring(params[1].lastIndexOf('=') + 1);
+        try {
         String query = "SELECT profile_id FROM account WHERE username='" + username + "' AND type='User';";  // gets profile id
         JSONArray jsonArr = execute(query);
         int profile_id = -1;
@@ -191,12 +198,14 @@ public final class DatabaseConnector {
             return "/html/failure.html";
         }
         query = "UPDATE animal SET available=0 WHERE animal_id=" + animal_id + ";";
-        SocketServer.timestamp(query);
         manipulate(query);
         query = "INSERT into adoption values (" + animal_id + ", " + profile_id + ", default);";
-        SocketServer.timestamp(query);
         manipulate(query);
         return "/html/success.html";
+        }
+        catch (Exception e) {
+            return "/html/failure.html";
+        }
     }
 
     private static JSONArray execute(String query) throws Exception {
