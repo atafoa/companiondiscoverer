@@ -40,13 +40,16 @@ public final class WebAPI {
         else {
             throw new Exception("Unable to handle API query!");
         }
-        SocketServer.timestamp(action);
         if (action.equals("register")) {
             DatabaseConnector.addAccount(params);
             return "/html/login.html";
         }   
         if (action.equals("login")) {
-            if (DatabaseConnector.authenticate(params)) {
+            String auth = DatabaseConnector.authenticate(params);
+            if (auth.equals("admin")) {
+                return "/html/admin.html";
+            }
+            else if (auth.equals("profile")) {
                 return "/html/user.html";
             }
             else {

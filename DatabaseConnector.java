@@ -124,22 +124,28 @@ public final class DatabaseConnector {
         close();
     }
 
-    public static boolean authenticate(String params[]) throws SQLException, Exception {
+    public static String authenticate(String params[]) throws SQLException, Exception {
         establishConnection();
         String username = params[0].substring(params[0].lastIndexOf('=') + 1);
         String password = params[1].substring(params[1].lastIndexOf('=') + 1);
-        String query = "SELECT * FROM account WHERE username='" + username + "' AND password='" + password + "';";
+        String query = "SELECT * FROM account WHERE username='" + username + "' AND password='" + password + "' AND type='Admin';";
         statement = connect.createStatement();
         resultSet = statement.executeQuery(query);
         JSONArray jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
-        //DEBUG
-        //System.out.println(jsonArr.toString());
-        if (jsonArr.toString().equals("[]")) {
-            return false;
+
+        if (!jsonArr.toString().equals("[]")) {
+            return "admin";
         }
-        else {
-            return true;
+
+        query = "SELECT * FROM account WHERE username='" + username + "' AND password='" + password + "' AND type='Profile';";
+        statement = connect.createStatement();
+        resultSet = statement.executeQuery(query);
+        jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
+        
+        if (!jsonArr.toString().equals("[]")) {
+            return "profile";
         }
+        return "invalid";
     }
 
     //public static ResultSet getUsers() {
