@@ -81,10 +81,20 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
             buildGETResponse(400, "Bad Request", PATH + "/error/400.html");
         }
         else if (targetString[0].equals("api")) {
-            //statusCode = WebAPI.handleQuery(startLine[0], startLine[1]);
-            SocketServer.timestamp("API " + startLine[0] + " request for " + targetString[1] + ".");
-            jsonArr = WebAPI.handleQuery(startLine[0], targetString[1]); // targetString[1] is the api request
-            buildAPIResponse(jsonArr, "API OK", PATH + "/error/api.html");
+            if (targetString[1].equals("post")) {   // We are receiving information and do not need a response JSON.
+                String nextPage;
+                nextPage = WebAPI.postQuery(targetString[2]);
+                buildGETResponse(200, "OK", PATH + nextPage);
+            }
+            else if (targetString[1].equals("get")) {
+                jsonArr = WebAPI.getQuery(targetString[2]); // We want to recieve a JSON of data.
+                buildAPIResponse(jsonArr, "OK");
+            }
+            else {
+                // We don't know what happened!
+                buildGETResponse(500, "Internal Server Error", PATH + "/error/500.html");
+            }
+            SocketServer.timestamp("API " + startLine[0] + " request for " + targetString[2] + ".");
         }
 
         else if (startLine[0].equals("GET")) { // If the request isn't malformed, then if it is a GET request...
@@ -158,10 +168,11 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
         SocketServer.timestamp("GET request for " + target + ", responded with code " + statusCode + ".");
     }
 
-    private void buildAPIResponse(JSONArray jsonArr, String statusText, String target) throws IOException {
+    private void buildAPIResponse(JSONArray jsonArr, String statusText) throws IOException {
         // Generates the byte array of the target to be served, and also stores the length of the target.
         int statusCode = 200;
-        System.out.println(jsonArr.toString());
+        //DEBUG
+        //System.out.println(jsonArr.toString());
         byte[] jsonByteArray = jsonArr.toString().getBytes();
         int targetLength = jsonByteArray.length;
         String end = "\r\n";    // Carriage return

@@ -93,16 +93,18 @@ public final class DatabaseConnector {
         String firstName = params[2].substring(params[2].lastIndexOf('=') + 1);
         String lastName = params[3].substring(params[3].lastIndexOf('=') + 1);
         String email = params[4].substring(params[4].lastIndexOf('=') + 1);
+        email = email.replace("%40", "@");
         String mobileNumber = params[5].substring(params[5].lastIndexOf('=') + 1);
         String insertStatement = "INSERT INTO account VALUES ("
-            + firstName + ","
-            + lastName + "," 
-            + mobileNumber + "," 
-            + email + "," 
-            + username + "," 
-            + password + "," 
             + "default," 
-            + "Profile" 
+            + "'" + firstName + "',"
+            + "'" + lastName + "'," 
+            + "'" + mobileNumber + "'," 
+            + "'" + email + "'," 
+            + "'" + username + "'," 
+            + "'" + password + "'," 
+            + "default," 
+            + "'Profile'" 
             + ");";
         System.out.println(insertStatement);
 
@@ -126,25 +128,18 @@ public final class DatabaseConnector {
         establishConnection();
         String username = params[0].substring(params[0].lastIndexOf('=') + 1);
         String password = params[1].substring(params[1].lastIndexOf('=') + 1);
-        String firstName = params[2].substring(params[2].lastIndexOf('=') + 1);
-        String lastName = params[3].substring(params[3].lastIndexOf('=') + 1);
-        String email = params[4].substring(params[4].lastIndexOf('=') + 1);
-        String mobileNumber = params[5].substring(params[5].lastIndexOf('=') + 1);
-        String insertStatement = "INSERT INTO account VALUES ("
-            + firstName + ","
-            + lastName + "," 
-            + mobileNumber + "," 
-            + email + "," 
-            + username + "," 
-            + password + "," 
-            + "default," 
-            + "Profile" 
-            + ");";
-        System.out.println(insertStatement);
+        String query = "SELECT * FROM account WHERE username='" + username + "' AND password='" + password + "';";
         statement = connect.createStatement();
-        resultSet = statement.executeQuery(insertStatement);
-        close();
-        return true;
+        resultSet = statement.executeQuery(query);
+        JSONArray jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
+        //DEBUG
+        //System.out.println(jsonArr.toString());
+        if (jsonArr.toString().equals("[]")) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     //public static ResultSet getUsers() {

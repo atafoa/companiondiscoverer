@@ -3,7 +3,7 @@ import org.json.JSONObject;
 import org.json.JSONException;
 
 public final class WebAPI {
-    public static JSONArray handleQuery(String method, String target) {
+    public static JSONArray getQuery(String target) {
     try {
         int i           = target.lastIndexOf('?');      // Find the last '?' in the api target.
         String action   = null;
@@ -17,22 +17,52 @@ public final class WebAPI {
             throw new Exception("Unable to handle API query!");
         }
 
-        //username=sbeve&password=fee
-        if (action.equals("register")) {
-            DatabaseConnector.addAccount(params);
-        }   
-        if (action.equals("login")) {
-            DatabaseConnector.authenticate(params);
-        }   
-            
-        return DatabaseConnector.readDatabase();
+        /*if (action.equals("profiles")) {
+            return DatabaseConnector.getProfiles(params);
+        }*/
     }
     catch (Exception e) {
         SocketServer.timestamp(e.toString());
     }
         return null;
     }
+
+    public static String postQuery(String target) {
+    try {
+        int i           = target.lastIndexOf('?');      // Find the last '?' in the api target.
+        String action   = null;
+        String params[] = null;
+        
+        if (i > 0) {
+            action = target.substring(0, i);
+            params = target.substring(i+1).split("&"); 
+        }
+        else {
+            throw new Exception("Unable to handle API query!");
+        }
+        SocketServer.timestamp(action);
+        if (action.equals("register")) {
+            DatabaseConnector.addAccount(params);
+            return "/html/login.html";
+        }   
+        if (action.equals("login")) {
+            if (DatabaseConnector.authenticate(params)) {
+                return "/html/user.html";
+            }
+            else {
+                return "/html/invalidlogin.html";
+            }
+        }
+    }
+    catch (Exception e) {
+        SocketServer.timestamp(e.toString());
+    }
+        return null;
+    }
+
 }
+
+
 /*
         String targetExtension = null;  // Extension of filename.
         String type = null;             // MIME type.
