@@ -8,18 +8,21 @@ public final class WebAPI {
         int i           = target.lastIndexOf('?');      // Find the last '?' in the api target.
         String action   = null;
         String params[] = null;
-        
         if (i > 0) {
             action = target.substring(0, i);
             params = target.substring(i+1).split("&"); 
         }
         else {
-            throw new Exception("Unable to handle API query!");
+            action = target;
         }
+        //FIX
+        //else {
+        //    throw new Exception("Unable to handle API GET query!");
+        //}
 
-        /*if (action.equals("profiles")) {
-            return DatabaseConnector.getProfiles(params);
-        }*/
+        if (action.equals("animals")) {
+            return DatabaseConnector.getAnimals(params);
+        }
     }
     catch (Exception e) {
         SocketServer.timestamp(e.toString());
@@ -33,12 +36,12 @@ public final class WebAPI {
         String action   = null;
         String params[] = null;
         
-        if (i > 0) {
+        if (i >= 0) {
             action = target.substring(0, i);
             params = target.substring(i+1).split("&"); 
         }
         else {
-            throw new Exception("Unable to handle API query!");
+            throw new Exception("Unable to handle API POST query!");
         }
         if (action.equals("register")) {
             DatabaseConnector.addAccount(params);

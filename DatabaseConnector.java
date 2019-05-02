@@ -20,6 +20,7 @@ public final class DatabaseConnector {
 
     public static void establishConnection() throws Exception {
         try {
+            close();
             Class.forName("com.mysql.cj.jdbc.Driver");
             connect = DriverManager.getConnection("jdbc:mysql://71.8.120.253:8001/companiondiscoverer?user=root&password=password");
         }
@@ -108,7 +109,6 @@ public final class DatabaseConnector {
             + ");";
         preparedStatement = connect.prepareStatement(insertStatement);
         preparedStatement.executeUpdate();
-        close();
     }
 
     public static void addAnimal(String params[]) throws SQLException, Exception {
@@ -139,7 +139,6 @@ public final class DatabaseConnector {
             + ");";
         preparedStatement = connect.prepareStatement(insertStatement);
         preparedStatement.executeUpdate();
-        close();
     }
 
     public static String authenticate(String params[]) throws SQLException, Exception {
@@ -166,19 +165,14 @@ public final class DatabaseConnector {
         return "invalid";
     }
 
-    //public static ResultSet getUsers() {
-        // select users
-    //}
-
-    public static void addAnimal(String desc, int age, String name, String type, String breed, String size, String color, boolean available, char sex, String pictureURL) throws SQLException {
-        String insertStatement = "INSERT INTO animal VALUES (" + desc + "," + age + "," + name + "," + type + "," + breed + "," + size + "," + color + "," + available + "," + new Date() + "," + sex + "," + pictureURL + ");";
+    public static JSONArray getAnimals(String[] params) throws Exception {
+        establishConnection();
+        JSONArray jsonArr = null;
         statement = connect.createStatement();
-        resultSet = statement.executeQuery(insertStatement);
+        resultSet = statement.executeQuery("select * from animal;");
+        jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
+        return jsonArr;
     }
-
-    //public static ResultSet getAnimal() {
-        // select users
-    //}
 
     public static void updateAnimal(int id, String columnName, Object data) throws SQLException {
         String updateStatement = "UPDATE animal SET " + columnName + " = " + data + " WHERE animal_ID = " + id;
