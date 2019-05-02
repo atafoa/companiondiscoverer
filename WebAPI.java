@@ -56,6 +56,10 @@ public final class WebAPI {
                 return "/html/invalidlogin.html";
             }
         }
+        if (action.equals("newanimal")) {
+            DatabaseConnector.addAnimal(params);
+            return "/html/admin.html";
+        }
     }
     catch (Exception e) {
         SocketServer.timestamp(e.toString());

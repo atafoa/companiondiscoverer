@@ -7,7 +7,7 @@ CREATE TABLE ANIMAL (
     Breed varchar(50),
     Size varchar(50),
     Color varchar(50) NOT NULL,
-    Available bit NOT NULL,
+    Available bit DEFAULT 1,
     Posted_Date timestamp DEFAULT CURRENT_TIMESTAMP,
     Sex char(1) NOT NULL,
     Picture_URL text,

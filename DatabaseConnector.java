@@ -106,19 +106,37 @@ public final class DatabaseConnector {
             + "default," 
             + "'Profile'" 
             + ");";
-        System.out.println(insertStatement);
+        preparedStatement = connect.prepareStatement(insertStatement);
+        preparedStatement.executeUpdate();
+        close();
+    }
 
-        /*preparedStatement = connect
-                    .prepareStatement("INSERT INTO account VALUES (?,?,?,?,?,?,default,?)");
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, mobileNumber);
-            preparedStatement.setString(4, email);
-            preparedStatement.setString(5, username);
-            preparedStatement.setString(6, password);
-            preparedStatement.setString(8, "Profile");
-            preparedStatement.executeUpdate();
-        */
+    public static void addAnimal(String params[]) throws SQLException, Exception {
+        establishConnection();
+        String name = params[0].substring(params[0].lastIndexOf('=') + 1);
+        String type = params[1].substring(params[1].lastIndexOf('=') + 1);
+        String breed = params[2].substring(params[2].lastIndexOf('=') + 1);
+        String size = params[3].substring(params[3].lastIndexOf('=') + 1);
+        String color = params[4].substring(params[4].lastIndexOf('=') + 1);
+        String age = params[5].substring(params[5].lastIndexOf('=') + 1);
+        String sex = params[6].substring(params[6].lastIndexOf('=') + 1);
+        String description = params[7].substring(params[7].lastIndexOf('=') + 1);
+        description = description.replace("+", " ");        
+        String picURL = params[8].substring(params[8].lastIndexOf('=') + 1);
+        String insertStatement = "INSERT INTO animal VALUES ("
+            + "default," 
+            + "'" + description + "',"
+            + age + "," 
+            + "'" + name + "'," 
+            + "'" + type + "'," 
+            + "'" + breed + "'," 
+            + "'" + size + "',"
+            + "'" + color + "'," 
+            + "default," 
+            + "default," 
+            + "'" + sex + "'," 
+            + "'" + picURL + "'" 
+            + ");";
         preparedStatement = connect.prepareStatement(insertStatement);
         preparedStatement.executeUpdate();
         close();
