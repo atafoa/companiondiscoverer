@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>CompanionDiscoverer</title>
+  </head>
+  <body>
+    <h1>
+        <a href="/">Homepage</a>
+    </h1>
+    <form action="/api/post/newanimal" method="GET" style="border:1px solid #ccc">
+        <div class="container">
+            <h1>List a Pet</h1>
+            <hr>
+        
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name" name="name" required>
+            <br>
+            <label for="type"><b>Type</b></label>
+            <br>
+            <input type="radio" name="type" value="cat"> Cat
+            <input type="radio" name="type" value="dog"> Dog  
+            <input type="radio" name="type" value="bird"> Bird
+            <br>
+            <label for="breed"><b>Breed</b></label>
+            <input type="text" placeholder="Enter Breed" name="breed">
+            <br>
+            <label for="size"><b>Size</b></label>
+            <input type="text" placeholder="Enter Size" name="size">
+            <br>
+            <label for="color"><b>Color</b></label>
+            <input type="text" placeholder="Enter Color" name="color" required>
+            <br>
+            <label for="age"><b>Age</b></label>
+            <input type="number" min="0" placeholder="Enter Age" name="age">
+            <br>
+            <label for="sex"><b>Sex</b></label>
+            <br>
+            <input type="radio" name="gender" value="m"> Male
+            <input type="radio" name="gender" value="f"> Female
+            <br>
+            <label for="description"><b>Description</b></label>
+            <br>
+            <textarea rows="10" cols="30" name="description"></textarea>
+            <br>
+            <br>
+            <label for="picture_url"><b>Picture</b></label>
+            <input type="text" placeholder="Picture URL" name="picture_url">
+            <br>
+            <br>
+            <button type="submit" class="newanimalbutton">Submit</button>
+        </div>
+    </form> 
+  </body>
+</html>

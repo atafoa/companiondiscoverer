@@ -1,24 +1,24 @@
 CREATE TABLE ANIMAL (
-	Animal_ID int NOT NULL AUTO_INCREMENT,
+    Animal_ID int NOT NULL AUTO_INCREMENT,
     Description text NOT NULL,
     Age int,
-    Name varchar(255) NOT NULL,
-    Type varchar(255) NOT NULL,
-    Breed varchar(255),
-    Size varchar(255),
-    Color varchar(255),
-    Available bit,
-    Posted_Date date,
-    Sex varchar(50),
+    Name varchar(50) NOT NULL,
+    Type varchar(50) NOT NULL,
+    Breed varchar(50),
+    Size varchar(50),
+    Color varchar(50) NOT NULL,
+    Available bit DEFAULT 1,
+    Posted_Date timestamp DEFAULT CURRENT_TIMESTAMP,
+    Sex char(1) NOT NULL,
     Picture_URL text,
     PRIMARY KEY(Animal_ID)
 );
 CREATE TABLE COMMON (
     Animal_ID int NOT NULL,
-    Type varchar(255) NOT NULL,
+    Type varchar(50) NOT NULL,
     Weight int,
-    Coat_Length varchar(255),
-    Coat_Texture varchar (255),
+    Coat_Length varchar(50),
+    Coat_Texture varchar(50),
     Sterilized bit,
     House_Trained bit,
     PRIMARY KEY(Animal_ID),
@@ -26,9 +26,15 @@ CREATE TABLE COMMON (
 );
 CREATE TABLE VACCINATION (
     Animal_ID int NOT NULL,
-    Vaccine bit,
+    Vaccine varchar(100) NOT NULL,
+    PRIMARY KEY(Animal_ID, Vaccine),
+    FOREIGN KEY(Animal_ID) REFERENCES COMMON(Animal_ID)
+);
+CREATE TABLE CATS (
+    Animal_ID int NOT NULL,
+    Declawed bit,
     PRIMARY KEY(Animal_ID),
-    FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
+    FOREIGN KEY(Animal_ID) REFERENCES COMMON(Animal_ID)
 );
 CREATE TABLE DOGS (
     Animal_ID int NOT NULL,
@@ -36,75 +42,70 @@ CREATE TABLE DOGS (
     PRIMARY KEY(Animal_ID),
     FOREIGN KEY(Animal_ID) REFERENCES COMMON(Animal_ID)
 );
-CREATE TABLE CATS (
-    Animal_ID int NOT NULL,
-    DECLAWED bit,
-    PRIMARY KEY(Animal_ID),
-    FOREIGN KEY(Animal_ID) REFERENCES COMMON(Animal_ID)
-);
 CREATE TABLE FISH (
     Animal_ID int NOT NULL,
-    Water_Type varchar(255),
+    Water_Type varchar(10) NOT NULL,
     PRIMARY KEY(Animal_ID),
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
 );
 CREATE TABLE ACCOUNT (
     Profile_ID int NOT NULL AUTO_INCREMENT,
-    First_Name varchar(255) NOT NULL,
-    Last_Name varchar(255) NOT NULL,
-    Mobile_Number int,
-    Email varchar(255) NOT NULL,
-    Username varchar(255) NOT NULL,
-    Password varchar(255) NOT NULL,
-    Join_Date date,
-    Type varchar(255),
+    First_Name varchar(100) NOT NULL,
+    Last_Name varchar(100) NOT NULL,
+    Mobile_Number varchar(12),
+    Email varchar(100) NOT NULL,
+    Username varchar(12) NOT NULL,
+    Password varchar(64) NOT NULL,
+    Join_Date timestamp DEFAULT CURRENT_TIMESTAMP,
+    Type varchar(100) NOT NULL,
+    UNIQUE(Email),
+    UNIQUE(Username),
     PRIMARY KEY(Profile_ID)
 );
 CREATE TABLE ADMIN (
     Profile_ID int NOT NULL,
     SSN int NOT NULL,
+    UNIQUE(SSN),
     PRIMARY KEY(Profile_ID),
-    FOREIGN KEY (Profile_ID) REFERENCES ACCOUNT(Profile_ID)
+    FOREIGN KEY(Profile_ID) REFERENCES ACCOUNT(Profile_ID)
 );
-CREATE TABLE PROFILE(
+CREATE TABLE PROFILE (
     Profile_ID int NOT NULL,
     PRIMARY KEY(Profile_ID),
-    FOREIGN KEY (Profile_ID) REFERENCES ACCOUNT(Profile_ID)
+    FOREIGN KEY(Profile_ID) REFERENCES ACCOUNT(Profile_ID)
 );
 CREATE TABLE INQUIRY (
-    Profile_ID int NOT NULL,
     Animal_ID int NOT NULL,
-    Inquiry_Question varchar(255),
-    Inquiry_Answers varchar(255),
-    Inquiry_Date timestamp NOT NULL,
+    Profile_ID int NOT NULL,
+    Inquiry_Date timestamp DEFAULT CURRENT_TIMESTAMP,
+    Inquiry_Question text NOT NULL,
+    Inquiry_Answer text,
     PRIMARY KEY(Animal_ID, Profile_ID, Inquiry_Date),
-    FOREIGN KEY (Profile_ID) REFERENCES ACCOUNT(Profile_ID),
+    FOREIGN KEY(Profile_ID) REFERENCES PROFILE(Profile_ID),
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
 );
 CREATE TABLE LIKES (
     Profile_ID int NOT NULL,
     Animal_ID int NOT NULL,
-    PRIMARY KEY(Animal_ID,Profile_ID),
-    FOREIGN KEY (Profile_ID) REFERENCES PROFILE(Profile_ID),
+    PRIMARY KEY(Animal_ID, Profile_ID),
+    FOREIGN KEY(Profile_ID) REFERENCES PROFILE(Profile_ID),
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
 );
 CREATE TABLE ADOPTION (
-    Profile_ID int NOT NULL,
     Animal_ID int NOT NULL,
-    Adoption_ID int NOT NULL,
-    Adoption_Date timestamp NOT NULL,
     Adoption_Fee int NOT NULL,
-    PRIMARY KEY(Adoption_ID),
+    Profile_ID int,
+    Adoption_Date timestamp,
+    PRIMARY KEY(Animal_ID),
     FOREIGN KEY (Profile_ID) REFERENCES PROFILE(Profile_ID),
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
 );
 CREATE TABLE DONATION (
     Profile_ID int NOT NULL,
     Animal_ID int NOT NULL,
-    Donation_Date timestamp NOT NULL,
+    Donation_Date timestamp DEFAULT CURRENT_TIMESTAMP,
     Donation_Amount int NOT NULL,
     PRIMARY KEY(Animal_ID, Profile_ID, Donation_Date),
     FOREIGN KEY (Profile_ID) REFERENCES PROFILE(Profile_ID),
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
 );
-
