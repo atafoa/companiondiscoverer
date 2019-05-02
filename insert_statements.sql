@@ -167,3 +167,196 @@ VALUES('Angelfish are generally peaceful with same-sized fish, but breeding ange
 
 INSERT INTO FISH(Animal_ID,Water_Type)
 VALUES(20,'Salt');
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Atafo','Abure','361-550-2335','aabure@companiondiscoverer.com','aa1','admin','2019-5-1','Admin');
+
+INSERT INTO ADMIN(Profile_ID,SSN)
+VALUES(1,635772354);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Kevin','Tung','681-550-2345','ktung@companiondiscoverer.com','kt2','admin','2019-5-1','Admin');
+
+INSERT INTO ADMIN(Profile_ID,SSN)
+VALUES(2,332172355);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('John','Appleseed','555-554-2331','johna@gmail.com','jappleseed','japple','2019-5-1','User');
+
+INSERT INTO PROFILE(Profile_ID)
+VALUES(3);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Lloyd','Reid','948-635-9081','lloydr@yahoo.com','lreid6','lloydR21','2019-5-2','User');
+
+INSERT INTO PROFILE(Profile_ID)
+VALUES(4);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Dennis','Hernandez','565-490-4652','dennizh@gmail.com','dennisH','passwordD','2019-5-1','User');
+
+INSERT INTO PROFILE(Profile_ID)
+VALUES(5);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Jane','Sparks','752-856-3507','jsparks@yahoo.com','jsparks','jane123','2019-5-1','User');
+
+INSERT INTO PROFILE(Profile_ID)
+VALUES(6);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Eunice','Robbins','760-481-9428','eunicer@gmail.com','Erobbins098','Erobb120_','2019-5-1','User');
+
+INSERT INTO PROFILE(Profile_ID)
+VALUES(7);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Jacquelyn','Bradley','401-228-3365','jbradley@yahoo.com','JacquelynB','TomBradyLover69','2019-5-1','User');
+
+INSERT INTO PROFILE(Profile_ID)
+VALUES(8);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Kyle','Patterson','609-708-2446','kylep@yahoo.com','Kyle_1','KyleP21','2019-5-1','User');
+
+INSERT INTO PROFILE(Profile_ID)
+VALUES(9);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Rachael','Lee','827-552-0481','leerachael@gmail.com','Rachael_Lee','LeeRachael12','2019-5-1','User');
+
+INSERT INTO PROFILE(Profile_ID)
+VALUES(10);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Maggie','Mendez','207-232-9711','MaggieM@gmail.com','MendezMaggie','MaggieMendez89','2019-5-1','User');
+
+INSERT INTO PROFILE(Profile_ID)
+VALUES(11);
+
+INSERT INTO ACCOUNT(First_Name, Last_Name, Mobile_Number, Email, Username, Password, Join_Date, Type)
+VALUES('Christian','Grant','319-947-4048','cgrant@gmail.com','grant1','chris21','2019-5-1','User');
+
+INSERT INTO PROFILE(Profile_ID)
+VALUES(12);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(1,3,'2019-5-1 12:10:00',5);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(1,4,'2019-5-1 13:00:00',5);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(2,5,'2019-5-1 14:00:00',20);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(2,6,'2019-5-1 04:00:00',10);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(3,7,'2019-5-1 14:01:00',15);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(3,8,'2019-5-1 11:00:00',20);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(4,9,'2019-5-1 09:30:00',22);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(4,10,'2019-5-1 09:30:10',50);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(5,11,'2019-5-1 11:10:00',100);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(5,12,'2019-5-1 12:10:00',50);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(6,3,'2019-5-1 13:00:00',100);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(6,4,'2019-5-1 14:50:00',40);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(7,5,'2019-5-1 12:50:00',30);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(7,6,'2019-5-1 07:00:00',20);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(8,7,'2019-5-1 06:00:00',60);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(8,8,'2019-5-1 21:00:00',5);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(9,9,'2019-5-1 22:00:00',10);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(9,10,'2019-5-1 23:30:00',12);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(10,11,'2019-5-1 21:00:00',22);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(10,12,'2019-5-1 15:50:00',33);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(11,3,'2019-5-1 12:40:00',55);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(11,4,'2019-5-1 11:00:00',65);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(12,5,'2019-5-1 14:00:00',66);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(12,6,'2019-5-1 08:00:00',70);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(13,7,'2019-5-1 14:45:00',77);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(13,8,'2019-5-1 16:50:00',21);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(14,9,'2019-5-1 16:20:00',12);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(14,10,'2019-5-1 14:20:00',11);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(15,11,'2019-5-1 14:15:00',5);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(15,12,'2019-5-1 16:10:00',5);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(16,3,'2019-5-1 17:00:00',5);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(16,4,'2019-5-1 16:00:00',10);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(17,5,'2019-5-1 19:00:00',10);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(17,6,'2019-5-1 20:00:00',10);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(18,7,'2019-5-1 23:00:00',100);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(18,8,'2019-5-1 21:00:00',90);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(19,9,'2019-5-1 15:00:00',10);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(19,10,'2019-5-1 16:00:00',10);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(20,11,'2019-5-1 20:00:00',10);
+
+INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
+VALUES(20,12,'2019-5-1 13:00:00',20);
+

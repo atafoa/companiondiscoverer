@@ -9,7 +9,7 @@ CREATE TABLE ANIMAL (
     Color varchar(50) NOT NULL,
     Available bit DEFAULT 1,
     Posted_Date timestamp DEFAULT CURRENT_TIMESTAMP,
-    Sex char(1) NOT NULL,
+    Sex char(1),
     Picture_URL text,
     PRIMARY KEY(Animal_ID)
 );
