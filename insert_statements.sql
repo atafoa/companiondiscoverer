@@ -400,15 +400,5 @@ insert into adoption values (default, 30, 9, default);
 insert into adoption values (default, 30, 10, default);
 insert into adoption values (default, 30, 11, default);
 insert into adoption values (default, 30, 12, default);
-insert into adoption values (default, 30, 3, default);
-insert into adoption values (default, 30, 4, default);
-insert into adoption values (default, 30, 5, default);
-insert into adoption values (default, 30, 6, default);
-insert into adoption values (default, 30, 7, default);
-insert into adoption values (default, 30, 8, default);
-insert into adoption values (default, 30, 9, default);
-insert into adoption values (default, 30, 10, default);
-insert into adoption values (default, 30, 11, default);
-insert into adoption values (default, 30, 12, default);
 
 
