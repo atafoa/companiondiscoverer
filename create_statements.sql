@@ -92,10 +92,10 @@ CREATE TABLE LIKES (
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)
 );
 CREATE TABLE ADOPTION (
-    Animal_ID int NOT NULL,
+    Animal_ID int NOT NULL AUTO_INCREMENT,
     Adoption_Fee int NOT NULL,
     Profile_ID int,
-    Adoption_Date timestamp,
+    Adoption_Date timestamp DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(Animal_ID),
     FOREIGN KEY (Profile_ID) REFERENCES PROFILE(Profile_ID),
     FOREIGN KEY(Animal_ID) REFERENCES ANIMAL(Animal_ID)

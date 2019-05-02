@@ -360,3 +360,55 @@ VALUES(20,11,'2019-5-1 20:00:00',10);
 INSERT INTO DONATION(Animal_ID, Profile_ID,Donation_Date,Donation_Amount)
 VALUES(20,12,'2019-5-1 13:00:00',20);
 
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(1,3,'How Old is Tammy?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(2,4,'How well does he play with others?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(3,5,'How much is the adoption fee?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(4,6,'Will she play well with my other pets?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(5,7,'How big is this animal?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(6,8,'Is he vaccinated?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(7,9,'How much is the adoption fee?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(8,11,'How much is the adoption fee?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(9,10,'How much is the adoption fee?');
+
+INSERT INTO INQUIRY(Animal_ID, Profile_ID, Inquiry_Question)
+VALUES(10,12,'How much is the adoption fee?');
+
+insert into adoption values (default, 30, 3, default);
+insert into adoption values (default, 30, 4, default);
+insert into adoption values (default, 30, 5, default);
+insert into adoption values (default, 30, 6, default);
+insert into adoption values (default, 30, 7, default);
+insert into adoption values (default, 30, 8, default);
+insert into adoption values (default, 30, 9, default);
+insert into adoption values (default, 30, 10, default);
+insert into adoption values (default, 30, 11, default);
+insert into adoption values (default, 30, 12, default);
+insert into adoption values (default, 30, 3, default);
+insert into adoption values (default, 30, 4, default);
+insert into adoption values (default, 30, 5, default);
+insert into adoption values (default, 30, 6, default);
+insert into adoption values (default, 30, 7, default);
+insert into adoption values (default, 30, 8, default);
+insert into adoption values (default, 30, 9, default);
+insert into adoption values (default, 30, 10, default);
+insert into adoption values (default, 30, 11, default);
+insert into adoption values (default, 30, 12, default);
+
+
