@@ -20,7 +20,7 @@ runwindows: win_main
 runlinux: nix_main
 	$(JAVA) -cp $(NIX_CLASSPATH) SocketServer
 
-loadwindos: load
+loadwindows: load
 	$(JAVA) -cp ".;./lib/mysql-connector-java-8.0.16.jar" DatabaseLoader
 	$(JAVA) -cp ".;./lib/mysql-connector-java-8.0.16.jar" DatabaseInsert
 

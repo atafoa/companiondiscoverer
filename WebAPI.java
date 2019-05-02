@@ -48,20 +48,17 @@ public final class WebAPI {
             return "/html/login.html";
         }   
         if (action.equals("login")) {
-            String auth = DatabaseConnector.authenticate(params);
-            if (auth.equals("admin")) {
-                return "/html/admin.html";
-            }
-            else if (auth.equals("profile")) {
-                return "/html/user.html";
-            }
-            else {
-                return "/html/invalidlogin.html";
-            }
+            return DatabaseConnector.authenticate(params);
         }
         if (action.equals("newanimal")) {
             DatabaseConnector.addAnimal(params);
             return "/html/admin.html";
+        }
+        if (action.equals("adopt")) {
+            String ret = DatabaseConnector.adoptAnimal(params);
+            SocketServer.timestamp(ret);
+            return ret;
+            //return DatabaseConnector.adoptAnimal(params);
         }
     }
     catch (Exception e) {

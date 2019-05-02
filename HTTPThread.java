@@ -141,6 +141,12 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
     //  thread has reached the end of its life.
     //
     private void buildGETResponse(int statusCode, String statusText, String target) throws IOException {
+        if (target.equals(".null")) {
+            statusCode = 500;
+            statusText = "Internal Server Error";
+            target = "./error/500.html";
+        }
+
         // Generates the byte array of the target to be served, and also stores the length of the target.
         File targetFile = new File(target);
         int targetLength = (int)targetFile.length();
