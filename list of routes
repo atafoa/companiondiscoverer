@@ -1,7 +1,16 @@
 /api/get/ (for getting data, returns json)
 -animals
+-inquiry
+-donation
+-useradopt
+-userdonation
 /api/post/ (for submitting info, returns url)
 -register
 -login
 -newanimal
+-editanimal
+-deleteanimal
 -adopt
+-inquiry
+-inquiryAns
+-donation

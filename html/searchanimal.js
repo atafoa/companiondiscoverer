@@ -31,8 +31,14 @@ fetch(url)
       sessionStorage.setItem('animal_id', `${data.Animal_ID}`);
       window.location.href = "animal.html";
     };
-    
-    span.innerHTML = `${data.Name} ${data.Breed} ${data.Type}`;
+    let availablity = data.Available;
+    if (availablity === true) {
+      availablity = "- Available"
+    }
+    else {
+      availablity = ""
+    }
+    span.innerHTML = `${data.Name} - ${data.Type} (${data.Breed}) ${availablity}`;
     
     append(a, span);
     append(li, a);

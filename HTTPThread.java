@@ -104,12 +104,6 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
             if (startLine[1].equals("/")) {      // If the request target is for /
                 startLine[1] = "/index.html";    // Adjust it to be /index.html
             }
-            
-            /*int i = startLine[1].lastIndexOf('?');   
-            if (i > 0) {               
-                startLine[1] = startLine[1].substring(0, i); 
-                SocketServer.timestamp(startLine[1]);
-            }*/
 
             File existChecker = new File(PATH + startLine[1]);   // Create a File to check to see if a file exists.
             if (!existChecker.exists()) {                   // If it doesn't exist

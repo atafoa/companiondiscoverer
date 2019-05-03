@@ -5,7 +5,7 @@ import org.json.JSONException;
 public final class WebAPI {
     public static JSONArray getQuery(String target) {
     try {
-        int i           = target.lastIndexOf('?');      // Find the last '?' in the api target.
+        int i           = target.indexOf('?');      // Find the last '?' in the api target.
         String action   = null;
         String params[] = null;
         if (i > 0) {
@@ -23,6 +23,18 @@ public final class WebAPI {
         if (action.equals("animals")) {
             return DatabaseConnector.getAnimals(params);
         }
+        if (action.equals("inquiry")) {
+            return DatabaseConnector.getInquiries();
+        }
+        if (action.equals("donation")) {
+            return DatabaseConnector.getDonations();
+        }
+        if (action.equals("useradopt")) {
+            return DatabaseConnector.getUserAdopt(params);
+        }
+        if (action.equals("userdonation")) {
+            return DatabaseConnector.getUserDonation(params);
+        }
     }
     catch (Exception e) {
         SocketServer.timestamp(e.toString());
@@ -32,10 +44,10 @@ public final class WebAPI {
 
     public static String postQuery(String target) {
     try {
-        int i           = target.lastIndexOf('?');      // Find the last '?' in the api target.
+        int i           = target.indexOf('?');      // Find the last '?' in the api target.
         String action   = null;
         String params[] = null;
-        
+
         if (i >= 0) {
             action = target.substring(0, i);
             params = target.substring(i+1).split("&"); 
@@ -43,6 +55,7 @@ public final class WebAPI {
         else {
             throw new Exception("Unable to handle API POST query!");
         }
+
         if (action.equals("register")) {
             DatabaseConnector.addAccount(params);
             return "/html/login.html";
@@ -54,12 +67,30 @@ public final class WebAPI {
             DatabaseConnector.addAnimal(params);
             return "/html/admin.html";
         }
-        if (action.equals("adopt")) {
-            String ret = DatabaseConnector.adoptAnimal(params);
-            SocketServer.timestamp(ret);
-            return ret;
-            //return DatabaseConnector.adoptAnimal(params);
+        if (action.equals("editanimal")) {
+            DatabaseConnector.editAnimal(params);
+            return "/html/admin.html";
         }
+        if (action.equals("deleteanimal")) {
+            DatabaseConnector.deleteAnimal(params);
+            return "/html/admin.html";
+        }
+        if (action.equals("adopt")) {
+            return DatabaseConnector.adoptAnimal(params);
+        }
+        if (action.equals("inquiry")) {
+            DatabaseConnector.addInquiry(params);
+            return "/html/animal.html";
+        }
+        if (action.equals("inquiryAns")) {
+            DatabaseConnector.updateInquiry(params);
+            return "/html/viewinquiry.html";
+        }
+        if (action.equals("donation")) {
+            DatabaseConnector.addDonation(params);
+            return "/html/animal.html";
+        }
+
     }
     catch (Exception e) {
         SocketServer.timestamp(e.toString());
@@ -68,17 +99,3 @@ public final class WebAPI {
     }
 
 }
-
-
-/*
-        String targetExtension = null;  // Extension of filename.
-        String type = null;             // MIME type.
-
-        int i = filename.lastIndexOf('.');      // Find the last '.' in the filename.
-        if (i > 0) {                // Avoid any weird errors.
-            targetExtension = filename.substring(i+1);  // Set targetExtension to the extension, with no dot.
-        }
-        else {
-            targetExtension = "";   // If we do have weird errors, avoid a null pointer.
-        }
-        */
