@@ -19,17 +19,27 @@ ul.innerHTML = '';
 
 const url = `../api/get/animals?name=${name}&type=${type}&breed=${breed}&color=${color}&sex=${sex}`;
 fetch(url)
-  .then((resp) => resp.json())
-    .then(function(data) {
-      return data.map(function(data) {
-        let li = createNode('li'),
-        span = createNode('span');
-        span.innerHTML = `${data.Name} ${data.Breed} ${data.Type}`;
-        append(li, span);
-        append(ul, li);
-      })
-    })
-    .catch(function(error) {
-    console.log(error);
-  });
+.then((resp) => resp.json())
+.then(function(data) {
+  return data.map(function(data) {
+    let li = createNode('li');
+    span = createNode('span');
+    let a = createNode('a');
+    
+    a.href = "#";
+    a.onclick = function() {
+      sessionStorage.setItem('animal_id', `${data.Animal_ID}`);
+      window.location.href = "animal.html";
+    };
+    
+    span.innerHTML = `${data.Name} ${data.Breed} ${data.Type}`;
+    
+    append(a, span);
+    append(li, a);
+    append(ul, li);
+  })
+})
+.catch(function(error) {
+  console.log(error);
+});
 };
