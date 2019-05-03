@@ -246,5 +246,16 @@ public final class DatabaseConnector {
     public static void makeAdoption() {
         
     }
+
+    public static JSONArray getDonations() throws Exception {
+        
+        establishConnection();
+        JSONArray jsonArr = null;
+        statement = connect.createStatement();
+        resultSet = statement.executeQuery("select * from donation");
+        jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
+        return jsonArr;
+    
+    }
 }
 
