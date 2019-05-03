@@ -177,7 +177,18 @@ public final class DatabaseConnector {
         int account_id = getIDFromUsername(username);
         inquiry_question = inquiry_question.replace("%20", " ");        
         String query = "INSERT INTO inquiry VALUES (" + animal_id + "," + account_id + ",default,'" + inquiry_question + "',default);";
-        SocketServer.timestamp(query);
+        manipulate(query);
+    }
+
+    public static void updateInquiry(String[] params) throws Exception {
+        establishConnection();
+        String animal_id = params[0].substring(params[0].lastIndexOf('=') + 1);
+        String account_id = params[1].substring(params[1].lastIndexOf('=') + 1);
+        String inquiry_answer = params[2].substring(params[2].lastIndexOf('=') + 1);
+        String inquiry_date = params[3].substring(params[3].lastIndexOf('=') + 1);
+        inquiry_answer = inquiry_answer.replace("%20", " ");        
+        inquiry_date = inquiry_date.replace("%20", " ");        
+        String query = "UPDATE inquiry SET inquiry_answer='" + inquiry_answer + "' WHERE animal_id=" + animal_id + " AND profile_id=" + account_id + " AND inquiry_date='" + inquiry_date + "';";
         manipulate(query);
     }
 
@@ -229,7 +240,6 @@ public final class DatabaseConnector {
             }
         }
         query += "'1'='1';";
-        SocketServer.timestamp(query);
         JSONArray jsonArr = null;
         statement = connect.createStatement();
         resultSet = statement.executeQuery(query);
@@ -256,7 +266,7 @@ public final class DatabaseConnector {
         establishConnection();
         JSONArray jsonArr = null;
         statement = connect.createStatement();
-        resultSet = statement.executeQuery("SELECT * FROM inquiry;");
+        resultSet = statement.executeQuery("SELECT * FROM inquiry WHERE inquiry_answer IS NULL;");
         jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
         return jsonArr;
     }

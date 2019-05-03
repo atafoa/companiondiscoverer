@@ -68,10 +68,15 @@ public final class WebAPI {
             DatabaseConnector.addInquiry(params);
             return "/html/animal.html";
         }
+        if (action.equals("inquiryAns")) {
+            DatabaseConnector.updateInquiry(params);
+            return "/html/viewinquiry.html";
+        }
         if (action.equals("donation")) {
             DatabaseConnector.addDonation(params);
             return "/html/animal.html";
         }
+
     }
     catch (Exception e) {
         SocketServer.timestamp(e.toString());

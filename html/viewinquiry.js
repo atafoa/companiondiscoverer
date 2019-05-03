@@ -34,7 +34,7 @@ function createNode(element) {
         answerbutton.onclick=function(){
             this.disabled = true;
             let answerval = document.getElementById(this.name).value;
-            let post = `../api/post/inquiryAns?animal_id=${data.Animal_ID}&profile_id=${data.Profile_ID}&inquiry_answer=${answerval}`;
+            let post = `../api/post/inquiryAns?animal_id=${data.Animal_ID}&profile_id=${data.Profile_ID}&inquiry_answer=${answerval}&inquiry_date=${data.Inquiry_Date}`;
             fetch(post);
         };
         answerbutton.innerHTML = `Answer`;
