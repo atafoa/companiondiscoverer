@@ -74,3 +74,19 @@ const url = `../api/get/animals?animal_id=${animalID}`;
   .catch(function(error) {
     console.log(error);
   });
+
+document.getElementById("submitinquiry").onclick=function(){
+  let question = document.getElementById("inquirytext").value;
+  document.getElementById("inquirytext").value = "";
+  let currentUser = sessionStorage.getItem("current_user");
+  let inquiry_endpoint = `../api/post/inquiry?animal_id=${animalID}&username=${currentUser}&inquiry_question=${question}`;
+  fetch(inquiry_endpoint);
+}
+
+document.getElementById("submitdonate").onclick=function(){
+  let amount = document.getElementById("donationamount").value;
+  document.getElementById("donationamount").value = "";
+  let currentUser = sessionStorage.getItem("current_user");
+  let donation_endpoint = `../api/post/donation?animal_id=${animalID}&username=${currentUser}&donation_amount=${amount}`;
+  fetch(donation_endpoint);
+}

@@ -169,6 +169,40 @@ public final class DatabaseConnector {
         }
     }
 
+    public static void addInquiry(String[] params) throws Exception {
+        establishConnection();
+        String animal_id = params[0].substring(params[0].lastIndexOf('=') + 1);
+        String username = params[1].substring(params[1].lastIndexOf('=') + 1);
+        String inquiry_question = params[2].substring(params[2].lastIndexOf('=') + 1);
+        int account_id = getIDFromUsername(username);
+        inquiry_question = inquiry_question.replace("%20", " ");        
+        String query = "INSERT INTO inquiry VALUES (" + animal_id + "," + account_id + ",default,'" + inquiry_question + "',default);";
+        SocketServer.timestamp(query);
+        manipulate(query);
+    }
+
+    public static void addDonation(String[] params) throws Exception {
+        establishConnection();
+        String animal_id = params[0].substring(params[0].lastIndexOf('=') + 1);
+        String username = params[1].substring(params[1].lastIndexOf('=') + 1);
+        String donation_amount = params[2].substring(params[2].lastIndexOf('=') + 1);
+        int account_id = getIDFromUsername(username);
+        String query = "INSERT INTO donation VALUES (" + account_id + "," + animal_id + ",default," + donation_amount + ");";
+        manipulate(query);
+    }
+
+    private static int getIDFromUsername(String username) throws Exception {
+        establishConnection();
+        String query = "SELECT profile_id FROM account WHERE username='" + username + "';";
+        JSONArray jsonArr = execute(query);
+        if (jsonArr.toString().equals("[]")) {
+            return 0;
+        }
+        else {
+            return jsonArr.getJSONObject(0).getInt("Profile_ID");
+        }
+    }
+
     private static JSONArray execute(String query) throws Exception {
         statement = connect.createStatement();
         resultSet = statement.executeQuery(query);
