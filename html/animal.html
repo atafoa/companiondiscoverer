@@ -5,46 +5,33 @@
     <title>CompanionDiscoverer</title>
   </head>
   <body>
-    <h1>
-        Viewing Animal
-    </h1>
+    <h3>
+      <a href="/">Homepage</a>
+    </h3>
     <div id="animal_info">
 
     </div>
-    <form action="/api/post/inquire" method="GET" style="border:1px solid #ccc">
+    <form id="inquire">
     <div class="container">
-        <h1>Make an Inquiry</h1>
-        <hr>
-    
-        <label for="name"><b>Name</b></label>
-        <input type="text" placeholder="Enter Name" name="name" required>
+        <label for="inquiry"><b>Make an Inquiry</b></label>
         <br>
-        <label for="description"><b>Description</b></label>
+        <textarea rows="4" cols="30" name="description"></textarea>
         <br>
-        <textarea rows="10" cols="30" name="description"></textarea>
-        <br>
-        
-        <br>
-        <button type="submit" class="newanimalbutton">Submit</button>
     </div>
     </form> 
-    <form action="/api/post/inquire" method="GET" style="border:1px solid #ccc">
+    <button id="submitinquiry" class="inquirebutton">Submit</button>
+    <br>
+    <br>
+    <form id="donate">
     <div class="container">
-        <h1>Make an Inquiry</h1>
-        <hr>
-    
-        <label for="name"><b>Name</b></label>
-        <input type="text" placeholder="Enter Name" name="name" required>
+        <label for="donation"><b>Make a Donation</b></label>
         <br>
-        <label for="description"><b>Description</b></label>
+        <label for="amount"><b>Amount</b></label>
+        <input type="number" min="0" placeholder="Enter Amount" name="amount">
         <br>
-        <textarea rows="10" cols="30" name="description"></textarea>
-        <br>
-        
-        <br>
-        <button type="submit" class="newanimalbutton">Submit</button>
     </div>
     </form> 
+    <button id="submitdonate" class="donatebutton">Donate</button>
     <script src="viewanimal.js"></script> 
   </body>
 </html>
