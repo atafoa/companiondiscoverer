@@ -29,6 +29,12 @@ public final class WebAPI {
         if (action.equals("donation")) {
             return DatabaseConnector.getDonations();
         }
+        if (action.equals("useradopt")) {
+            return DatabaseConnector.getUserAdopt(params);
+        }
+        if (action.equals("userdonation")) {
+            return DatabaseConnector.getUserDonation(params);
+        }
     }
     catch (Exception e) {
         SocketServer.timestamp(e.toString());

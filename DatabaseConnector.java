@@ -270,9 +270,16 @@ public final class DatabaseConnector {
     
     public static void deleteAnimal(String[] params) throws SQLException, Exception {
         establishConnection();
-        //String updateStatement = "UPDATE animal SET " + columnName + " = " + data + " WHERE animal_ID = " + id;
-        //statement = connect.createStatement();
-        //resultSet = statement.executeQuery(updateStatement); 
+        String animal_id = params[0].substring(params[0].lastIndexOf('=') + 1);
+        manipulate("DELETE FROM cats WHERE animal_id="+animal_id+";");
+        manipulate("DELETE FROM dogs WHERE animal_id="+animal_id+";");
+        manipulate("DELETE FROM common WHERE animal_id="+animal_id+";");
+        manipulate("DELETE FROM fish WHERE animal_id="+animal_id+";");
+        manipulate("DELETE FROM inquiry WHERE animal_id="+animal_id+";");
+        manipulate("DELETE FROM likes WHERE animal_id="+animal_id+";");
+        manipulate("DELETE FROM donation WHERE animal_id="+animal_id+";");
+        manipulate("DELETE FROM adoption WHERE animal_id="+animal_id+";");
+        manipulate("DELETE FROM animal WHERE animal_id="+animal_id+";");
     }
 
     public static JSONArray getDonations() throws Exception {
@@ -291,6 +298,20 @@ public final class DatabaseConnector {
         resultSet = statement.executeQuery("SELECT * FROM inquiry WHERE inquiry_answer IS NULL;");
         jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
         return jsonArr;
+    }
+
+    public static JSONArray getUserAdopt(String[] params) throws Exception {
+        establishConnection();
+        String profile_id = params[0].substring(params[0].lastIndexOf('=') + 1);
+        String query = "SELECT * FROM adoption WHERE profile_id=" + profile_id + ";";
+        return execute(query);
+    }
+
+    public static JSONArray getUserDonation(String[] params) throws Exception {
+        establishConnection();
+        String profile_id = params[0].substring(params[0].lastIndexOf('=') + 1);
+        String query = "SELECT * FROM donation WHERE profile_id=" + profile_id + ";";
+        return execute(query);
     }
 }
 

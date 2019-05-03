@@ -20,7 +20,7 @@ function createNode(element) {
         append(info, question);
         
         date = createNode('p');
-        date.innerHTML = `Date: ${data.Inquiry_Date}`;
+        date.innerHTML = `Date: ${data.Inquiry_Date} | Animal ID: ${data.Animal_ID} | Inquirer: ${data.Profile_ID}`;
         append(info, date);        
   
         answer = createNode('input');

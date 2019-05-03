@@ -2,6 +2,8 @@
 -animals
 -inquiry
 -donation
+-useradopt
+-userdonation
 /api/post/ (for submitting info, returns url)
 -register
 -login
