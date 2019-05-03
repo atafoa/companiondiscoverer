@@ -6,10 +6,39 @@
   </head>
   <body>
     <h1>
-        Placeholder
+        <a href="/">Homepage</a>
     </h1>
-    <h3>
-        <a href="/">Feature 1</a>
-    </h3>
+    <form id="search">
+        <div class="container">
+            <h1>Search Animals</h1>
+            <hr>
+            <h2>Filter by</h2>
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name" name="name">
+            <br>
+            <label for="type"><b>Type</b></label>
+            <input type="radio" name="type" value="Cat"> Cat
+            <input type="radio" name="type" value="Dog"> Dog  
+            <input type="radio" name="type" value="Fish"> Fish
+            <input type="radio" name="type" value=""> None
+            <br>
+            <label for="breed"><b>Breed</b></label>
+            <input type="text" placeholder="Enter Breed" name="breed">
+            <br>
+            <label for="color"><b>Color</b></label>
+            <input type="text" placeholder="Enter Color" name="color">
+            <br>
+            <label for="sex"><b>Sex</b></label>
+            <input type="radio" name="sex" value="M"> Male
+            <input type="radio" name="sex" value="F"> Female
+            <input type="radio" name="sex" value=""> None
+            <br>
+        </div>
+    </form> 
+    <button class="searchbutton" id="submit">Submit</button>
+
+    <ul id="animals">
+    </ul>
+    <script src="searchanimal.js"></script>
   </body>
 </html>

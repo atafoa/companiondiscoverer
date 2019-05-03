@@ -29,45 +29,6 @@ public final class DatabaseConnector {
         }
     }
 
-    public static JSONArray readDatabase() throws Exception {
-        JSONArray jsonArr = null;
-        try {
-            // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            // Setup the connection with the DB
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://71.8.120.253:8001/companiondiscoverer?"
-                            + "user=root&password=password");
-
-            statement = connect.createStatement();
-
-            resultSet = statement
-                    .executeQuery("select * from test.testtable");
-            jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
-            writeResultSet(resultSet);
-
-        }
-        catch (Exception e) {
-            throw e;
-        }
-        finally {
-            close();
-        }
-        return jsonArr;
-    }
-
-    private static void writeResultSet(ResultSet resultSet) throws SQLException {
-        // ResultSet is initially before the first data set
-        while (resultSet.next()) {
-            // It is possible to get the columns via name
-            // also possible to get the columns via the column number
-            // which starts at 1
-            // e.g. resultSet.getSTring(2);
-            String user = resultSet.getString("name");
-            System.out.println("User: " + user);
-        }
-    }
-
     // You need to close the resultSet
     private static void close() {
         try {
@@ -221,16 +182,23 @@ public final class DatabaseConnector {
 
     public static JSONArray getAnimals(String[] params) throws Exception {
         establishConnection();
+        String query = "SELECT * FROM Animal";
         if (params != null) {
+            query += " WHERE ";
             int paramNumber = params.length;
             for (int i = 0; i < paramNumber; i++) {
-
+                String key = params[i].substring(0, params[i].lastIndexOf('='));
+                String value = params[i].substring(params[i].lastIndexOf('=') + 1); // value
+                if (!value.isEmpty()) {
+                    query += key + "='" + value + "' AND ";
+                }
             }
         }
-
+        query += "'1'='1';";
+        SocketServer.timestamp(query);
         JSONArray jsonArr = null;
         statement = connect.createStatement();
-        resultSet = statement.executeQuery("select * from animal;");
+        resultSet = statement.executeQuery(query);
         jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
         return jsonArr;
     }
