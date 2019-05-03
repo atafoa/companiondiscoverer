@@ -247,10 +247,32 @@ public final class DatabaseConnector {
         return jsonArr;
     }
 
-    public static void updateAnimal(int id, String columnName, Object data) throws SQLException {
-        String updateStatement = "UPDATE animal SET " + columnName + " = " + data + " WHERE animal_ID = " + id;
-        statement = connect.createStatement();
-        resultSet = statement.executeQuery(updateStatement); 
+    public static void editAnimal(String[] params) throws SQLException, Exception {
+        establishConnection();
+        String animal_id = params[0].substring(params[0].lastIndexOf('=') + 1);
+        String key = params[1].substring(params[1].lastIndexOf('=') + 1);
+        String value = params[2].substring(params[2].lastIndexOf('=') + 1);
+        try {
+            String query = "UPDATE animal SET " + key + "='" + value + "' WHERE animal_id="+animal_id+";";
+            manipulate(query);
+        }
+        catch (Exception e) {
+            SocketServer.timestamp(e.toString());
+            try {
+                String query = "UPDATE animal SET " + key + "=" + value + " WHERE animal_id="+animal_id+";";
+                manipulate(query);
+            }
+            catch (Exception f) {
+                SocketServer.timestamp(f.toString());
+            }
+        }
+    }
+    
+    public static void deleteAnimal(String[] params) throws SQLException, Exception {
+        establishConnection();
+        //String updateStatement = "UPDATE animal SET " + columnName + " = " + data + " WHERE animal_ID = " + id;
+        //statement = connect.createStatement();
+        //resultSet = statement.executeQuery(updateStatement); 
     }
 
     public static JSONArray getDonations() throws Exception {

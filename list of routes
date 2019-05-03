@@ -6,6 +6,8 @@
 -register
 -login
 -newanimal
+-editanimal
+-deleteanimal
 -adopt
 -inquiry
 -inquiryAns

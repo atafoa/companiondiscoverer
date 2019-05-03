@@ -61,6 +61,14 @@ public final class WebAPI {
             DatabaseConnector.addAnimal(params);
             return "/html/admin.html";
         }
+        if (action.equals("editanimal")) {
+            DatabaseConnector.editAnimal(params);
+            return "/html/admin.html";
+        }
+        if (action.equals("deleteanimal")) {
+            DatabaseConnector.deleteAnimal(params);
+            return "/html/admin.html";
+        }
         if (action.equals("adopt")) {
             return DatabaseConnector.adoptAnimal(params);
         }

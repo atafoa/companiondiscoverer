@@ -7,6 +7,7 @@ function append(parent, el) {
 }
 
 let animalID = sessionStorage.getItem('animal_id');
+let userID = sessionStorage.getItem('current_user');
 const url = `../api/get/animals?animal_id=${animalID}`;
   fetch(url)
   .then((resp) => resp.json())
@@ -75,6 +76,25 @@ const url = `../api/get/animals?animal_id=${animalID}`;
       append(ul, li_fee);
 
       append(info, ul);
+
+      if (userID === "aa1" || userID === "kt2") {
+        editbutton = createNode('button');
+        editbutton.innerHTML = `Edit Animal`;
+        editbutton.onclick=function() {
+          location.href = '/html/updateanimal.html';
+        }
+        append(info, editbutton);
+
+        deletebutton = createNode('button');
+        deletebutton.innerHTML = `Delete Animal`;
+        deletebutton.onclick=function() {
+          let shouldDelete = confirm(`Are you sure you want to delete ${data.Name} (ID: ${data.Animal_ID})?`);
+          if (shouldDelete) {
+            fetch(`../api/post/deleteanimal?animal_id=${data.Animal_ID}`);
+          }
+        }
+        append(info, deletebutton);
+      }
     })
   })
   .catch(function(error) {
