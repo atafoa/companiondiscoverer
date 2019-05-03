@@ -1,6 +1,6 @@
-/api/get/
+/api/get/ (for getting data, returns json)
 -animals
-/api/post/
+/api/post/ (for submitting info, returns url)
 -register
 -login
 -newanimal

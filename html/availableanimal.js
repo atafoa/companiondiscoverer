@@ -19,11 +19,9 @@ fetch(url)
     span.innerHTML = `${data.Animal_ID} ${data.Name} ${data.Type} ${data.Breed}`;
     a.href = '#';
     a.onclick = function() {
-      user_name = document.getElementById('username').value;
+      user_name = sessionStorage.getItem('current_user');
       if (user_name) {
         window.location.href = `../api/post/adopt?username=${user_name}&animal=${data.Animal_ID}`;
-      } else {
-        alert('Enter your username to continue!');
       }
     };
     

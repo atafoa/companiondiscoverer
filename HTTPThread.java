@@ -81,6 +81,8 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
             buildGETResponse(400, "Bad Request", PATH + "/error/400.html");
         }
         else if (targetString[0].equals("api")) {
+            SocketServer.timestamp("API request for " + targetString[2] + ".");
+
             if (targetString[1].equals("post")) {   // We are receiving information and do not need a response JSON.
                 String nextPage;
                 nextPage = WebAPI.postQuery(targetString[2]);
@@ -98,9 +100,16 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
         }
 
         else if (startLine[0].equals("GET")) { // If the request isn't malformed, then if it is a GET request...
+            SocketServer.timestamp("GET request for " + startLine[1] + ".");
             if (startLine[1].equals("/")) {      // If the request target is for /
                 startLine[1] = "/index.html";    // Adjust it to be /index.html
             }
+            
+            /*int i = startLine[1].lastIndexOf('?');   
+            if (i > 0) {               
+                startLine[1] = startLine[1].substring(0, i); 
+                SocketServer.timestamp(startLine[1]);
+            }*/
 
             File existChecker = new File(PATH + startLine[1]);   // Create a File to check to see if a file exists.
             if (!existChecker.exists()) {                   // If it doesn't exist
@@ -171,7 +180,6 @@ public class HTTPThread implements Runnable {      // implements Runnable to all
 
         responseDataStream.close();                                         // Close the connection.
         connectionSocket.close();                                           // Close the socket completely.
-        SocketServer.timestamp("GET request for " + target + ", responded with code " + statusCode + ".");
     }
 
     private void buildAPIResponse(JSONArray jsonArr, String statusText) throws IOException {
