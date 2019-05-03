@@ -1,9 +1,12 @@
 /api/get/ (for getting data, returns json)
 -animals
+-inquiry
+-donation
 /api/post/ (for submitting info, returns url)
 -register
 -login
 -newanimal
 -adopt
 -inquiry
+-inquiryAns
 -donation

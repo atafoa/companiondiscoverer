@@ -23,6 +23,12 @@ public final class WebAPI {
         if (action.equals("animals")) {
             return DatabaseConnector.getAnimals(params);
         }
+        if (action.equals("inquiry")) {
+            return DatabaseConnector.getInquiries();
+        }
+        if (action.equals("donation")) {
+            return DatabaseConnector.getDonations();
+        }
     }
     catch (Exception e) {
         SocketServer.timestamp(e.toString());

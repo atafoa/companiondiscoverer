@@ -14,7 +14,7 @@ const url = `../api/get/animals?animal_id=${animalID}`;
     return data.map(function(data) {
       info = document.getElementById('animal_info');
       
-      namez = createNode('h1');
+      namez = createNode('h3');
       namez.innerHTML = `${data.Name}`;
       append(info, namez);
       
@@ -22,52 +22,58 @@ const url = `../api/get/animals?animal_id=${animalID}`;
       img.src = `${data.Picture_URL}`;
       append(info, img);
 
-      desc = createNode('h3');
+      desc = createNode('p');
       desc.innerHTML = `${data.Description}`;
       append(info, desc);
       
       date = createNode('p');
-      date.innerHTML = `${data.Posted_Date}`;
+      date.innerHTML = `Date Posted: ${data.Posted_Date}`;
       append(info, date);
       
       ul = createNode('ul');
       
       li_age = createNode('li');
       age = createNode('p');
-      age.innerHTML = `${data.Age}`;
+      age.innerHTML = `Age: ${data.Age}`;
       append(li_age, age);
       append(ul, li_age);
       
       li_type = createNode('li');
       type = createNode('p');
-      type.innerHTML = `${data.Type}`;
+      type.innerHTML = `Type: ${data.Type}`;
       append(li_type, type);
       append(ul, li_type);
       
       li_breed = createNode('li');
       breed = createNode('p');
-      breed.innerHTML = `${data.Breed}`;
+      breed.innerHTML = `Breed: ${data.Breed}`;
       append(li_breed, breed);
       append(ul, li_breed);
       
       li_size = createNode('li');
       size = createNode('p');
-      size.innerHTML = `${data.Size}`;
+      size.innerHTML = `Size: ${data.Size}`;
       append(li_size, size);
       append(ul, li_size);
       
       li_color = createNode('li');
       color = createNode('p');
-      color.innerHTML = `${data.Color}`;
+      color.innerHTML = `Color: ${data.Color}`;
       append(li_color, color);
       append(ul, li_color);
       
       li_sex = createNode('li');
       sex = createNode('p');
-      sex.innerHTML = `${data.Sex}`;
+      sex.innerHTML = `Sex: ${data.Sex}`;
       append(li_sex, sex);
       append(ul, li_sex);
-      
+
+      li_fee = createNode('li');
+      fee = createNode('p');
+      fee.innerHTML = `Adoption Fee: $${data.Adoption_Fee}`;
+      append(li_fee, fee);
+      append(ul, li_fee);
+
       append(info, ul);
     })
   })

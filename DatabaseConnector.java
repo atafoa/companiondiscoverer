@@ -243,19 +243,22 @@ public final class DatabaseConnector {
         resultSet = statement.executeQuery(updateStatement); 
     }
 
-    public static void makeAdoption() {
-        
-    }
-
     public static JSONArray getDonations() throws Exception {
-        
         establishConnection();
         JSONArray jsonArr = null;
         statement = connect.createStatement();
-        resultSet = statement.executeQuery("select * from donation");
+        resultSet = statement.executeQuery("SELECT * FROM donation;");
         jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
         return jsonArr;
-    
+    }
+
+    public static JSONArray getInquiries() throws Exception {
+        establishConnection();
+        JSONArray jsonArr = null;
+        statement = connect.createStatement();
+        resultSet = statement.executeQuery("SELECT * FROM inquiry;");
+        jsonArr = ResultSetConverter.ResultSetToJSON(resultSet);
+        return jsonArr;
     }
 }
 
